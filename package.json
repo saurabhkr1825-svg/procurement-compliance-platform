@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "seed": "tsx ./src/utils/seed.ts"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.3.3",
@@ -25,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^18.0.4",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
     "eslint-config-prettier": "^10.1.8",
@@ -32,6 +34,7 @@
     "postcss": "^8.5.28",
     "prettier": "^3.9.9",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }
