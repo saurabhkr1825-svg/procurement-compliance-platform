@@ -63,6 +63,17 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-foreground">Name (Optional)</label>
+              <Input 
+                id="full_name" 
+                name="full_name" 
+                type="text" 
+                placeholder="Ravi Kumar"
+                className="bg-white border-border"
+              />
+            </div>
+
+            <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-sm font-semibold text-foreground">Password</label>
                 <Link href="#" className="text-xs font-medium text-primary hover:text-primary/80">

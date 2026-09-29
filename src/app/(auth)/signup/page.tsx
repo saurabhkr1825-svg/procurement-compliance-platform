@@ -71,6 +71,29 @@ export default function SignupPage() {
             )}
 
             <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-foreground">Full Name</label>
+              <Input 
+                id="full_name" 
+                name="full_name" 
+                type="text" 
+                placeholder="Ravi Kumar"
+                required 
+                className="bg-white border-border"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-foreground">Organization (Optional)</label>
+              <Input 
+                id="organization" 
+                name="organization" 
+                type="text" 
+                placeholder="Ministry of Finance"
+                className="bg-white border-border"
+              />
+            </div>
+
+            <div className="space-y-1.5">
               <label className="text-sm font-semibold text-foreground">Email</label>
               <Input 
                 id="email" 

@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { PlusCircle } from "lucide-react"
+import { AddBidderModal } from "./add-bidder-modal"
 
 export default async function BiddersPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -22,10 +22,7 @@ export default async function BiddersPage({ params }: { params: Promise<{ id: st
           <h2 className="text-xl font-semibold">Bidders Workspace</h2>
           <p className="text-sm text-muted-foreground">Manage participating entities and their documents.</p>
         </div>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Add Bidder
-        </Button>
+        <AddBidderModal tenderId={id} />
       </div>
 
       <Card>
