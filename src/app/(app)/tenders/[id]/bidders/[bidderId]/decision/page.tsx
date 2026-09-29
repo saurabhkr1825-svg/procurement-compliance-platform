@@ -1,11 +1,9 @@
 import { createClient } from "@/utils/supabase/server"
 import { notFound, redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ShieldCheck, FileCheck, CheckCircle2, XCircle, AlertCircle, HelpCircle, Lock } from "lucide-react"
 
 export default async function OfficerDecisionPage({
   params,
@@ -31,7 +29,9 @@ export default async function OfficerDecisionPage({
   const passCount = compliance?.filter(c => c.result === 'PASS').length || 0
   const failCount = compliance?.filter(c => c.result === 'FAIL').length || 0
   const reviewCount = compliance?.filter(c => c.result === 'REVIEW').length || 0
-  const notVerifiedCount = compliance?.filter(c => c.result === 'NOT VERIFIED').length || 0
+  const notVerifiedCount = compliance?.filter(c => c.result === 'NOT_VERIFIED' || c.result === 'NOT VERIFIED').length || 0
+
+  const hasIssues = failCount > 0 || reviewCount > 0 || notVerifiedCount > 0
 
   async function submitDecision(formData: FormData) {
     "use server"
@@ -64,101 +64,151 @@ export default async function OfficerDecisionPage({
   const existingDecision = bidder.decisions && bidder.decisions.length > 0 ? bidder.decisions[0] : null
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm" asChild>
+        <Button variant="ghost" size="sm" asChild className="text-slate-500 hover:text-slate-900">
           <Link href={`/tenders/${id}/bidders/${bidderId}`}>
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Bidder
+            Back to Bidder Workspace
           </Link>
         </Button>
       </div>
 
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Final Officer Decision</h1>
-        <p className="text-muted-foreground">Record the official procurement decision for {bidder.legal_name}.</p>
+      <div className="flex items-start gap-4 pb-4 border-b border-slate-200">
+        <div className="bg-blue-100 p-3 rounded-lg border border-blue-200">
+          <FileCheck className="h-8 w-8 text-blue-700" />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Official Compliance Decision</h1>
+          <p className="text-slate-500 mt-1">Record the final procurement decision for <strong className="text-slate-700">{bidder.legal_name}</strong>.</p>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Compliance Summary</CardTitle>
-          <CardDescription>Review the evaluation results before making a decision.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-4 gap-4 text-center">
-            <div className="p-4 bg-green-50 rounded-lg border border-green-100">
-              <div className="text-3xl font-bold text-green-600">{passCount}</div>
-              <div className="text-sm font-medium text-green-800">PASS</div>
-            </div>
-            <div className="p-4 bg-red-50 rounded-lg border border-red-100">
-              <div className="text-3xl font-bold text-red-600">{failCount}</div>
-              <div className="text-sm font-medium text-red-800">FAIL</div>
-            </div>
-            <div className="p-4 bg-amber-50 rounded-lg border border-amber-100">
-              <div className="text-3xl font-bold text-amber-600">{reviewCount}</div>
-              <div className="text-sm font-medium text-amber-800">REVIEW</div>
-            </div>
-            <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-              <div className="text-3xl font-bold text-gray-600">{notVerifiedCount}</div>
-              <div className="text-sm font-medium text-gray-800">NOT VERIFIED</div>
-            </div>
-          </div>
-          
-          {reviewCount > 0 && (
-            <div className="mt-4 p-3 bg-amber-50 text-amber-800 rounded-md border border-amber-200 text-sm flex items-center">
-              <span className="font-semibold mr-2">Warning:</span> There are unresolved items in the review queue. It is recommended to resolve them before final decision.
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Record Decision</CardTitle>
-          <CardDescription>This action is logged in the immutable audit trail.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form action={submitDecision} className="space-y-6">
-            <div className="space-y-3">
-              <label className="text-sm font-medium">Decision Status</label>
-              <div className="flex gap-4">
-                <label className="flex items-center space-x-2 border p-4 rounded-md cursor-pointer hover:bg-slate-50 flex-1">
-                  <input type="radio" name="status" value="QUALIFIED" defaultChecked={existingDecision?.status === 'QUALIFIED'} required />
-                  <span className="font-medium text-green-700">Qualified</span>
-                </label>
-                <label className="flex items-center space-x-2 border p-4 rounded-md cursor-pointer hover:bg-slate-50 flex-1">
-                  <input type="radio" name="status" value="DISQUALIFIED" defaultChecked={existingDecision?.status === 'DISQUALIFIED'} />
-                  <span className="font-medium text-red-700">Disqualified</span>
-                </label>
-                <label className="flex items-center space-x-2 border p-4 rounded-md cursor-pointer hover:bg-slate-50 flex-1">
-                  <input type="radio" name="status" value="REQUIRES_CLARIFICATION" defaultChecked={existingDecision?.status === 'REQUIRES_CLARIFICATION'} />
-                  <span className="font-medium text-amber-700">Needs Clarification</span>
-                </label>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card className="border-slate-200 shadow-sm">
+          <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
+            <CardTitle className="text-base font-semibold text-slate-800 flex items-center">
+              <ShieldCheck className="h-4 w-4 mr-2 text-slate-500" /> System Evaluation Summary
+            </CardTitle>
+            <CardDescription>AI-extracted evidence and automated checks.</CardDescription>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="divide-y divide-slate-100">
+              <div className="flex items-center justify-between p-4 bg-green-50/30">
+                <div className="flex items-center text-green-700 font-medium">
+                  <CheckCircle2 className="h-4 w-4 mr-2" /> PASS
+                </div>
+                <span className="font-bold text-green-700">{passCount}</span>
+              </div>
+              <div className="flex items-center justify-between p-4 bg-red-50/30">
+                <div className="flex items-center text-red-700 font-medium">
+                  <XCircle className="h-4 w-4 mr-2" /> FAIL
+                </div>
+                <span className="font-bold text-red-700">{failCount}</span>
+              </div>
+              <div className="flex items-center justify-between p-4 bg-amber-50/30">
+                <div className="flex items-center text-amber-700 font-medium">
+                  <AlertCircle className="h-4 w-4 mr-2" /> REVIEW
+                </div>
+                <span className="font-bold text-amber-700">{reviewCount}</span>
+              </div>
+              <div className="flex items-center justify-between p-4 bg-slate-50">
+                <div className="flex items-center text-slate-600 font-medium">
+                  <HelpCircle className="h-4 w-4 mr-2" /> NOT VERIFIED
+                </div>
+                <span className="font-bold text-slate-600">{notVerifiedCount}</span>
               </div>
             </div>
+            {hasIssues && (
+              <div className="p-4 bg-amber-50 text-sm text-amber-800 border-t border-amber-100">
+                <strong>Attention:</strong> There are unresolved issues or failures. Please review the compliance matrix and evidence before making a final decision.
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Decision Summary / Remarks</label>
-              <textarea 
-                name="summary" 
-                className="w-full p-3 border rounded-md min-h-[100px]" 
-                placeholder="Provide official justification based on the compliance matrix..."
-                required
-                defaultValue={existingDecision?.summary}
-              ></textarea>
-            </div>
+        <Card className="border-slate-200 shadow-sm">
+          <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
+            <CardTitle className="text-base font-semibold text-slate-800 flex items-center">
+              <Lock className="h-4 w-4 mr-2 text-blue-600" /> Officer Authority
+            </CardTitle>
+            <CardDescription>Final decision override.</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            {existingDecision ? (
+              <div className="space-y-4">
+                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800 flex items-start gap-3">
+                  <ShieldCheck className="h-5 w-5 mt-0.5 text-blue-600 flex-shrink-0" />
+                  <div>
+                    <strong className="block mb-1 text-base">Decision recorded by authorized officer</strong>
+                    <p>A final decision has already been recorded for this bidder. Modifications require re-opening the evaluation phase.</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-3 pt-4 border-t border-slate-100">
+                  <div>
+                    <span className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Status</span>
+                    <span className="inline-flex font-semibold text-slate-900 bg-slate-100 px-3 py-1 rounded">{existingDecision.status}</span>
+                  </div>
+                  <div>
+                    <span className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Officer Remarks</span>
+                    <p className="text-sm text-slate-700 bg-white border border-slate-200 p-3 rounded-md">{existingDecision.summary || 'No remarks provided.'}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <form action={submitDecision} className="space-y-6">
+                <div className="space-y-3">
+                  <label htmlFor="status" className="block text-sm font-semibold text-slate-900">
+                    Final Decision
+                  </label>
+                  <select 
+                    name="status" 
+                    id="status"
+                    className="w-full flex h-10 w-full items-center justify-between rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    required
+                  >
+                    <option value="">Select a status...</option>
+                    <option value="QUALIFIED">QUALIFIED - Compliant</option>
+                    <option value="DISQUALIFIED">DISQUALIFIED - Non-Compliant</option>
+                    <option value="CLARIFICATION_REQUIRED">REQUIRES CLARIFICATION</option>
+                  </select>
+                </div>
+                
+                <div className="space-y-3">
+                  <label htmlFor="summary" className="block text-sm font-semibold text-slate-900">
+                    Officer Remarks & Justification
+                  </label>
+                  <textarea 
+                    name="summary" 
+                    id="summary"
+                    rows={4}
+                    className="flex min-h-[120px] w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Provide justification for this decision. This will be included in the immutable audit log and final report."
+                    required
+                  />
+                </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t">
-              <Button variant="outline" type="button" asChild>
-                <Link href={`/tenders/${id}/bidders/${bidderId}`}>Cancel</Link>
-              </Button>
-              <Button type="submit">
-                {existingDecision ? "Update Decision" : "Confirm Final Decision"}
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800 flex items-start gap-3">
+                  <ShieldCheck className="h-5 w-5 mt-0.5 text-blue-600 flex-shrink-0" />
+                  <div>
+                    <strong className="block mb-1">By submitting this form:</strong>
+                    <ul className="list-disc pl-4 space-y-1 text-slate-700">
+                      <li>You establish human authority over the AI evaluation.</li>
+                      <li>This decision will be cryptographically hashed in the final report.</li>
+                      <li>Your identity will be permanently recorded in the audit log.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 shadow-sm h-11 text-base font-medium">
+                  Record Official Decision
+                </Button>
+              </form>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

@@ -2,7 +2,9 @@ import { createClient } from "@/utils/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle2, XCircle, AlertCircle, HelpCircle } from "lucide-react"
+import { CheckCircle2, XCircle, AlertCircle, HelpCircle, Search, Filter } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 export default async function ComplianceMatrixPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -12,96 +14,140 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
     .from('compliance_results')
     .select(`
       *,
-      bidders(legal_name),
-      requirements(title, description, category),
+      bidders(legal_name, tender_id),
+      requirements(title, description, category, tender_id),
       bidder_documents(file_name)
     `)
     .order('created_at', { ascending: false })
-    // In a real app we'd filter by tender_id through a join or view, but for MVP we fetch all and filter JS side or use a view
-    // Since we don't have a direct tender_id on compliance_results, we rely on requirements.tender_id or bidders.tender_id
 
-  // We filter in JS for the MVP to keep DB queries simple without custom views
-  const filteredResults = results?.filter((r: { requirements?: { tender_id?: string }, bidders?: { tender_id?: string } }) => r.requirements?.tender_id === id || r.bidders?.tender_id === id) || []
+  const filteredResults = results?.filter(
+    (r: { requirements?: { tender_id?: string }, bidders?: { tender_id?: string } }) => r.requirements?.tender_id === id || r.bidders?.tender_id === id
+  ) || []
+
+  // Calculate summary
+  const summary = {
+    PASS: filteredResults.filter((r: { result: string }) => r.result === 'PASS').length,
+    FAIL: filteredResults.filter((r: { result: string }) => r.result === 'FAIL').length,
+    REVIEW: filteredResults.filter((r: { result: string }) => r.result === 'REVIEW').length,
+    NOT_VERIFIED: filteredResults.filter((r: { result: string }) => r.result === 'NOT_VERIFIED' || r.result === 'NOT VERIFIED').length,
+  }
 
   function getStatusIcon(status: string) {
     switch (status) {
-      case 'PASS': return <CheckCircle2 className="h-5 w-5 text-green-500" />
-      case 'FAIL': return <XCircle className="h-5 w-5 text-red-500" />
-      case 'REVIEW': return <AlertCircle className="h-5 w-5 text-amber-500" />
-      case 'NOT VERIFIED': return <HelpCircle className="h-5 w-5 text-gray-400" />
+      case 'PASS': return <CheckCircle2 className="h-4 w-4 text-green-600" />
+      case 'FAIL': return <XCircle className="h-4 w-4 text-red-600" />
+      case 'REVIEW': return <AlertCircle className="h-4 w-4 text-amber-600" />
+      case 'NOT VERIFIED':
+      case 'NOT_VERIFIED': return <HelpCircle className="h-4 w-4 text-slate-400" />
       default: return null
     }
   }
 
   function getStatusBadge(status: string) {
     switch (status) {
-      case 'PASS': return <Badge className="bg-green-100 text-green-800 hover:bg-green-200">PASS</Badge>
-      case 'FAIL': return <Badge className="bg-red-100 text-red-800 hover:bg-red-200">FAIL</Badge>
-      case 'REVIEW': return <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200">REVIEW</Badge>
-      case 'NOT VERIFIED': return <Badge variant="outline" className="text-gray-500">NOT VERIFIED</Badge>
-      default: return <Badge>{status}</Badge>
+      case 'PASS': return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-green-50 text-green-700 border border-green-200">{getStatusIcon('PASS')} PASS</span>
+      case 'FAIL': return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-red-50 text-red-700 border border-red-200">{getStatusIcon('FAIL')} FAIL</span>
+      case 'REVIEW': return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">{getStatusIcon('REVIEW')} REVIEW</span>
+      case 'NOT VERIFIED':
+      case 'NOT_VERIFIED': return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200">{getStatusIcon('NOT VERIFIED')} NOT VERIFIED</span>
+      default: return <Badge variant="outline">{status}</Badge>
     }
   }
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-xl font-semibold">Compliance Matrix</h2>
-          <p className="text-sm text-muted-foreground">Evaluation of bidder evidence against frozen requirements.</p>
-        </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card className="bg-green-50/50 border-green-200 shadow-sm">
+          <CardContent className="p-4 flex flex-col items-center justify-center">
+            <span className="text-3xl font-bold text-green-700">{summary.PASS}</span>
+            <span className="text-xs font-medium text-green-600 uppercase tracking-wider mt-1">PASS</span>
+          </CardContent>
+        </Card>
+        <Card className="bg-red-50/50 border-red-200 shadow-sm">
+          <CardContent className="p-4 flex flex-col items-center justify-center">
+            <span className="text-3xl font-bold text-red-700">{summary.FAIL}</span>
+            <span className="text-xs font-medium text-red-600 uppercase tracking-wider mt-1">FAIL</span>
+          </CardContent>
+        </Card>
+        <Card className="bg-amber-50/50 border-amber-200 shadow-sm">
+          <CardContent className="p-4 flex flex-col items-center justify-center">
+            <span className="text-3xl font-bold text-amber-700">{summary.REVIEW}</span>
+            <span className="text-xs font-medium text-amber-600 uppercase tracking-wider mt-1">REVIEW</span>
+          </CardContent>
+        </Card>
+        <Card className="bg-slate-50 border-slate-200 shadow-sm">
+          <CardContent className="p-4 flex flex-col items-center justify-center">
+            <span className="text-3xl font-bold text-slate-700">{summary.NOT_VERIFIED}</span>
+            <span className="text-xs font-medium text-slate-500 uppercase tracking-wider mt-1 text-center">NOT VERIFIED</span>
+          </CardContent>
+        </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Evaluation Results</CardTitle>
-          <CardDescription>All extracted evidence and verification checks.</CardDescription>
+      <Card className="border-slate-200 shadow-sm">
+        <CardHeader className="border-b border-slate-100 bg-slate-50/50 pb-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <CardTitle className="text-lg font-bold text-slate-900">Compliance Matrix</CardTitle>
+              <CardDescription>Comprehensive evaluation of extracted bidder evidence</CardDescription>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
+                <Input placeholder="Search criteria..." className="pl-8 w-full md:w-[250px] bg-white h-9 text-sm" />
+              </div>
+              <Button variant="outline" size="sm" className="h-9">
+                <Filter className="h-4 w-4 mr-2 text-slate-500" /> Filter
+              </Button>
+            </div>
+          </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <div className="overflow-x-auto">
             <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Bidder</TableHead>
-                  <TableHead>Requirement</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Evidence / Reason</TableHead>
-                  <TableHead>Source Doc</TableHead>
-                  <TableHead>Action</TableHead>
+              <TableHeader className="bg-slate-50 border-b border-slate-200">
+                <TableRow className="hover:bg-transparent">
+                  <TableHead className="font-semibold text-slate-700 h-11">Requirement</TableHead>
+                  <TableHead className="font-semibold text-slate-700 h-11">Bidder</TableHead>
+                  <TableHead className="font-semibold text-slate-700 h-11">Result</TableHead>
+                  <TableHead className="font-semibold text-slate-700 h-11 w-1/3">Extracted Evidence</TableHead>
+                  <TableHead className="font-semibold text-slate-700 h-11">Provenance</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredResults.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
-                      No compliance results available. Run evaluation first.
+                    <TableCell colSpan={5} className="text-center text-slate-500 py-12">
+                      <div className="flex flex-col items-center justify-center">
+                        <HelpCircle className="h-8 w-8 text-slate-300 mb-3" />
+                        <p className="font-medium text-slate-600">No compliance results available</p>
+                        <p className="text-sm">Run evaluation or freeze a requirement pack first.</p>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredResults.map((res: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => (
-                    <TableRow key={res.id}>
-                      <TableCell className="font-medium">{res.bidders?.legal_name}</TableCell>
-                      <TableCell>
-                        <div className="font-medium text-sm">{res.requirements?.title}</div>
-                        <div className="text-xs text-muted-foreground line-clamp-1">{res.requirements?.description}</div>
+                  filteredResults.map((res: { id: string; result: string; reason: string; evidence: string; requirements?: { title: string; description: string; category: string; requirement_type: string }; bidders?: { legal_name: string }; bidder_documents?: { file_name: string } }) => (
+                    <TableRow key={res.id} className="hover:bg-slate-50/80 transition-colors border-b border-slate-100 last:border-0">
+                      <TableCell className="align-top py-4">
+                        <div className="font-semibold text-slate-900 text-sm mb-1">{res.requirements?.title}</div>
+                        <div className="text-xs text-slate-500 line-clamp-2 leading-relaxed max-w-xs">{res.requirements?.description}</div>
                       </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          {getStatusIcon(res.result)}
-                          {getStatusBadge(res.result)}
+                      <TableCell className="align-top py-4">
+                        <span className="font-medium text-slate-700 text-sm">{res.bidders?.legal_name}</span>
+                      </TableCell>
+                      <TableCell className="align-top py-4">
+                        {getStatusBadge(res.result)}
+                      </TableCell>
+                      <TableCell className="align-top py-4">
+                        <div className="text-sm font-medium text-slate-900 bg-slate-100 px-2 py-1 rounded inline-block mb-1.5">{res.evidence || 'No evidence extracted'}</div>
+                        <div className="text-xs text-slate-600 leading-relaxed">{res.reason}</div>
+                      </TableCell>
+                      <TableCell className="align-top py-4">
+                        <div className="flex flex-col gap-1.5">
+                          <span className="inline-flex items-center text-xs font-medium text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 w-fit">SIMULATED</span>
+                          <span className="text-xs text-slate-500 truncate max-w-[150px] block" title={res.bidder_documents?.file_name}>
+                            {res.bidder_documents?.file_name || 'Verification Source'}
+                          </span>
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="text-sm">{res.evidence || '-'}</div>
-                        <div className="text-xs text-muted-foreground mt-1">{res.reason}</div>
-                      </TableCell>
-                      <TableCell className="text-sm text-primary">
-                        {res.bidder_documents?.file_name || 'N/A'}
-                      </TableCell>
-                      <TableCell>
-                        <a href={`/tenders/${id}/compliance/${res.id}`} className="text-sm font-medium text-blue-600 hover:underline">
-                          Inspect
-                        </a>
                       </TableCell>
                     </TableRow>
                   ))

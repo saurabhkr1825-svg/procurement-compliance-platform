@@ -1,6 +1,7 @@
-import Link from "next/link"
 import { createClient } from "@/utils/supabase/server"
 import { notFound } from "next/navigation"
+import { TenderNav } from "@/components/layout/tender-nav"
+import { FileText, Calendar, Activity } from "lucide-react"
 
 export default async function TenderLayout({
   children,
@@ -22,39 +23,28 @@ export default async function TenderLayout({
     notFound()
   }
 
-  const navItems = [
-    { name: "Overview", href: `/tenders/${id}` },
-    { name: "Documents", href: `/tenders/${id}/documents` },
-    { name: "Requirements", href: `/tenders/${id}/requirements` },
-    { name: "Bidders", href: `/tenders/${id}/bidders` },
-    { name: "Compliance Matrix", href: `/tenders/${id}/compliance` },
-    { name: "Review Queue", href: `/tenders/${id}/risks` },
-    { name: "Report", href: `/tenders/${id}/report` },
-  ]
-
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">{tender.title}</h1>
-        <div className="flex space-x-4 text-sm text-muted-foreground mt-2">
-          <span>Ref: {tender.reference_number}</span>
-          <span>Status: <span className="font-medium text-amber-600">{tender.status}</span></span>
+      <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">{tender.title}</h1>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 mt-3">
+              <span className="flex items-center gap-1.5"><FileText className="h-4 w-4" /> Ref: {tender.reference_number}</span>
+              <span className="flex items-center gap-1.5"><Activity className="h-4 w-4" /> Status: 
+                <span className="font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">{tender.status}</span>
+              </span>
+              <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {new Date(tender.created_at).toLocaleDateString()}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            {/* Actions area placeholder */}
+          </div>
         </div>
+        <TenderNav id={id} />
       </div>
 
-      <nav className="flex space-x-6 border-b pb-2">
-        {navItems.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
-
-      <div>{children}</div>
+      <div className="pb-8">{children}</div>
     </div>
   )
 }

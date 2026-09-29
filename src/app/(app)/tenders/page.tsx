@@ -1,23 +1,43 @@
 import Link from "next/link"
-import { Search, PlusCircle, Filter } from "lucide-react"
+import { Search, PlusCircle, Filter, FileText, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { EmptyState } from "@/components/ui/empty-state"
 import { createClient } from "@/utils/supabase/server"
 
 export default async function TendersPage() {
   const supabase = await createClient()
-  const { data: tenders } = await supabase.from('tenders').select('*').order('created_at', { ascending: false })
+  
+  // We need bidders count and requirements count per tender for the polished table.
+  const { data: tenders } = await supabase
+    .from('tenders')
+    .select(`
+      *,
+      bidders (count),
+      requirements (count)
+    `)
+    .order('created_at', { ascending: false })
+
+  function getStatusBadge(status: string) {
+    switch (status) {
+      case 'DRAFT': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">DRAFT</span>
+      case 'ACTIVE': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">ACTIVE</span>
+      case 'EVALUATION': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">EVALUATION</span>
+      case 'COMPLETED': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700 border border-green-200">COMPLETED</span>
+      default: return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">{status}</span>
+    }
+  }
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Tenders</h1>
-          <p className="text-muted-foreground">Manage and evaluate your procurement tenders.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Tender Workspace</h1>
+          <p className="text-slate-500">Manage and evaluate your procurement tenders.</p>
         </div>
-        <Button asChild>
+        <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm">
           <Link href="/tenders/new">
             <PlusCircle className="mr-2 h-4 w-4" />
             Create Tender
@@ -27,46 +47,86 @@ export default async function TendersPage() {
 
       <div className="flex items-center space-x-2">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search tenders..." className="pl-8" />
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
+          <Input placeholder="Search by Tender ID or Title..." className="pl-8 bg-white shadow-sm border-slate-200" />
         </div>
-        <Button variant="outline">
-          <Filter className="mr-2 h-4 w-4" />
+        <Button variant="outline" className="shadow-sm border-slate-200 bg-white">
+          <Filter className="mr-2 h-4 w-4 text-slate-500" />
           Filter
         </Button>
       </div>
 
-      <Card>
+      <Card className="border-slate-200 shadow-sm overflow-hidden bg-white">
         <CardContent className="p-0">
           {!tenders || tenders.length === 0 ? (
-            <EmptyState 
-              title="No tenders found" 
-              description="You haven't created any tenders yet. Get started by creating your first tender." 
-              action={
-                <Button variant="outline" asChild className="mt-4">
-                  <Link href="/tenders/new">Create Tender</Link>
-                </Button>
-              }
-            />
-          ) : (
-            <div className="divide-y">
-              {tenders.map((tender) => (
-                <div key={tender.id} className="p-4 flex items-center justify-between hover:bg-muted/50 transition-colors">
-                  <div>
-                    <h3 className="font-semibold text-lg text-primary">
-                      <Link href={`/tenders/${tender.id}`}>{tender.title}</Link>
-                    </h3>
-                    <div className="text-sm text-muted-foreground mt-1 flex gap-4">
-                      <span>Ref: {tender.reference_number}</span>
-                      <span>Org: {tender.organization}</span>
-                      <span className="font-medium text-amber-600">{tender.status}</span>
-                    </div>
-                  </div>
-                  <Button variant="ghost" asChild>
-                    <Link href={`/tenders/${tender.id}`}>Manage</Link>
+            <div className="py-12">
+              <EmptyState 
+                title="No tenders yet" 
+                description="Create your first tender to begin requirement extraction and bid evaluation." 
+                action={
+                  <Button asChild className="mt-4 bg-blue-600 hover:bg-blue-700">
+                    <Link href="/tenders/new">Create Tender</Link>
                   </Button>
-                </div>
-              ))}
+                }
+              />
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader className="bg-slate-50 border-b border-slate-200">
+                  <TableRow className="hover:bg-transparent">
+                    <TableHead className="font-semibold text-slate-700 h-11 w-[120px]">Tender ID</TableHead>
+                    <TableHead className="font-semibold text-slate-700 h-11">Tender Title</TableHead>
+                    <TableHead className="font-semibold text-slate-700 h-11 text-center">Reqs</TableHead>
+                    <TableHead className="font-semibold text-slate-700 h-11 text-center">Bidders</TableHead>
+                    <TableHead className="font-semibold text-slate-700 h-11">Status</TableHead>
+                    <TableHead className="font-semibold text-slate-700 h-11">Last Updated</TableHead>
+                    <TableHead className="font-semibold text-slate-700 h-11 text-right">Action</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {tenders.map((tender) => (
+                    <TableRow key={tender.id} className="hover:bg-slate-50/80 transition-colors border-b border-slate-100 last:border-0 group">
+                      <TableCell className="font-medium text-slate-600 text-sm">
+                        <Link href={`/tenders/${tender.id}`} className="hover:text-blue-600 hover:underline">
+                          {tender.reference_number}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <FileText className="h-4 w-4 text-slate-400" />
+                          <Link href={`/tenders/${tender.id}`} className="font-semibold text-slate-900 text-sm hover:text-blue-600">
+                            {tender.title}
+                          </Link>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <span className="inline-flex items-center justify-center bg-slate-100 text-slate-700 font-medium text-xs px-2 py-0.5 rounded-full">
+                          {tender.requirements?.[0]?.count || 0}
+                        </span>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <span className="inline-flex items-center justify-center bg-slate-100 text-slate-700 font-medium text-xs px-2 py-0.5 rounded-full">
+                          {tender.bidders?.[0]?.count || 0}
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        {getStatusBadge(tender.status)}
+                      </TableCell>
+                      <TableCell className="text-sm text-slate-500">
+                        {new Date(tender.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="sm" asChild className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Link href={`/tenders/${tender.id}`}>
+                            Workspace <ChevronRight className="ml-1 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </div>
           )}
         </CardContent>
