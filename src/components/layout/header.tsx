@@ -28,7 +28,7 @@ export async function Header() {
       <div className="flex items-center gap-4 sm:gap-6">
         <Button variant="ghost" size="sm" className="relative h-9 w-9 px-0 text-slate-500 hover:text-slate-900 hover:bg-slate-200/50 rounded-full">
           <Bell className="h-5 w-5" />
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-blue-600 border-2 border-white"></span>
+          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary border-2 border-white"></span>
           <span className="sr-only">Notifications</span>
         </Button>
         

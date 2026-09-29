@@ -18,7 +18,6 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Tenders', href: '/tenders', icon: FileText },
   { name: 'Review Queue', href: '/review-queue', icon: ClipboardCheck },
-  { name: 'Compliance', href: '/compliance', icon: ShieldCheck },
   { name: 'Reports', href: '/reports', icon: FileBarChart },
   { name: 'Activity', href: '/activity', icon: Activity },
   { name: 'Settings', href: '/settings', icon: Settings },

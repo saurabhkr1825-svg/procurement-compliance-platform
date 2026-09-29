@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --color-border: var(--border);
@@ -38,60 +38,60 @@
 }
 
 :root {
-  --background: #F4F6F8; /* MAIN BACKGROUND */
-  --foreground: #14213D; /* DARK NAVY */
+  --background: #F3F4F6; /* LIGHT GRAY BACKGROUND */
+  --foreground: #1A1A1A; /* DARK TEXT */
   
   --card: #FFFFFF; /* WHITE */
-  --card-foreground: #14213D; /* DARK NAVY */
+  --card-foreground: #1A1A1A; /* DARK TEXT */
   
   --popover: #FFFFFF; /* WHITE */
-  --popover-foreground: #14213D; /* DARK NAVY */
+  --popover-foreground: #1A1A1A; /* DARK TEXT */
   
-  --primary: #2563EB; /* PRIMARY BLUE */
+  --primary: #F05623; /* ORANGE PRIMARY */
   --primary-foreground: #FFFFFF; /* WHITE */
   
-  --secondary: #EEF3FA; /* OFF-BLUE SURFACE */
-  --secondary-foreground: #14213D; /* DARK NAVY */
+  --secondary: #FFFFFF; /* WHITE SURFACE */
+  --secondary-foreground: #1A1A1A; /* DARK TEXT */
   
-  --muted: #F4F6F8; /* MAIN BACKGROUND */
-  --muted-foreground: #64748B; /* SECONDARY TEXT */
+  --muted: #E5E5E5; /* MUTED BORDER / BG */
+  --muted-foreground: #737373; /* MUTED TEXT */
   
-  --accent: #DCE9F8; /* SOFT BLUE */
-  --accent-foreground: #1D4ED8; /* PRIMARY BLUE HOVER */
+  --accent: #FFEDD5; /* LIGHT ORANGE */
+  --accent-foreground: #F05623; /* ORANGE PRIMARY */
   
   --destructive: #DC2626; /* FAIL */
   --destructive-foreground: #FFFFFF; /* WHITE */
   
-  --border: #D9E1EA; /* BORDER */
-  --input: #D9E1EA; /* BORDER */
-  --ring: #DCE9F8; /* SOFT BLUE */
+  --border: #E5E5E5; /* BORDER */
+  --input: #E5E5E5; /* BORDER */
+  --ring: #FFEDD5; /* RING */
   
-  --radius: 0.75rem; /* 12px rounded corners */
+  --radius: 1.5rem; /* 24px rounded corners */
 }
 
 /* Hardcode out dark mode for now as per enterprise light UI instruction */
 @media (prefers-color-scheme: dark) {
   :root {
     /* Falling back to light mode variables to force light mode */
-    --background: #F4F6F8;
-    --foreground: #14213D;
+    --background: #F3F4F6;
+    --foreground: #1A1A1A;
     --card: #FFFFFF;
-    --card-foreground: #14213D;
+    --card-foreground: #1A1A1A;
     --popover: #FFFFFF;
-    --popover-foreground: #14213D;
-    --primary: #2563EB;
+    --popover-foreground: #1A1A1A;
+    --primary: #F05623;
     --primary-foreground: #FFFFFF;
-    --secondary: #EEF3FA;
-    --secondary-foreground: #14213D;
-    --muted: #F4F6F8;
-    --muted-foreground: #64748B;
-    --accent: #DCE9F8;
-    --accent-foreground: #1D4ED8;
+    --secondary: #FFFFFF;
+    --secondary-foreground: #1A1A1A;
+    --muted: #E5E5E5;
+    --muted-foreground: #737373;
+    --accent: #FFEDD5;
+    --accent-foreground: #F05623;
     --destructive: #DC2626;
     --destructive-foreground: #FFFFFF;
-    --border: #D9E1EA;
-    --input: #D9E1EA;
-    --ring: #DCE9F8;
+    --border: #E5E5E5;
+    --input: #E5E5E5;
+    --ring: #FFEDD5;
   }
 }
 
