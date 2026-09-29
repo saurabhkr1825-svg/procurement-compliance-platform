@@ -72,7 +72,7 @@ export default async function RequirementsPage({ params }: { params: Promise<{ i
               {(!requirements || requirements.length === 0) ? (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center text-muted-foreground py-8">
-                    No requirements found. Click "Extract Requirements (AI)" to analyze tender documents.
+                    No requirements found. Click &quot;Extract Requirements (AI)&quot; to analyze tender documents.
                   </TableCell>
                 </TableRow>
               ) : (

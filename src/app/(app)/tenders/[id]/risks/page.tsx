@@ -1,6 +1,8 @@
 import { createClient } from "@/utils/supabase/server"
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -59,7 +61,7 @@ export default async function ReviewQueuePage({ params }: { params: Promise<{ id
                   </TableCell>
                 </TableRow>
               ) : (
-                reviews.map((rev: any) => (
+                reviews.map((rev: { id: string; bidders: { legal_name: string }; requirements?: { title: string }; verification_reason: string; reason: string; evidence: string }) => (
                   <TableRow key={rev.id}>
                     <TableCell className="font-medium">{rev.bidders.legal_name}</TableCell>
                     <TableCell>{rev.requirements?.title}</TableCell>
@@ -70,7 +72,7 @@ export default async function ReviewQueuePage({ params }: { params: Promise<{ id
                       </div>
                       <div className="text-xs text-muted-foreground mt-1 line-clamp-2">{rev.reason}</div>
                     </TableCell>
-                    <TableCell className="text-sm">"{rev.evidence}"</TableCell>
+                    <TableCell className="text-sm">&quot;{rev.evidence}&quot;</TableCell>
                     <TableCell>
                       <Button variant="outline" size="sm" asChild>
                         <Link href={`/tenders/${id}/compliance/${rev.id}`}>Resolve</Link>

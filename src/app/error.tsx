@@ -30,7 +30,7 @@ export default function ErrorBoundary({
       
       <div className="space-y-4">
         <p className="text-sm text-muted-foreground">
-          Note: If you are seeing "supabaseUrl is required", it means Vercel is missing your NEXT_PUBLIC_SUPABASE_URL environment variable.
+          Note: If you are seeing &quot;supabaseUrl is required&quot;, it means Vercel is missing your NEXT_PUBLIC_SUPABASE_URL environment variable.
         </p>
         <Button onClick={() => reset()}>Try again</Button>
       </div>

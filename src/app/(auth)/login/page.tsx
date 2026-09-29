@@ -240,7 +240,7 @@ export default function LoginPage() {
 
           <div style={{ textAlign: "center", marginTop: "16px" }}>
             <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)" }}>
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
             </span>
             <a href="/signup" style={{ fontSize: "14px", color: "#ffffff", fontWeight: "600", textDecoration: "none" }}>
               Sign Up

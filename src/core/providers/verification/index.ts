@@ -1,4 +1,4 @@
-import { VerificationResult, VerificationProvenance, VerificationState } from '../../domain/types';
+import { VerificationResult, VerificationProvenance } from '../../domain/types';
 
 export interface VerificationAdapter {
   sourceName: string;

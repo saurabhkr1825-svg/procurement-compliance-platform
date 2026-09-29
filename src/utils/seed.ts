@@ -24,6 +24,8 @@ async function seed() {
   const demoEmail = 'demo@gmail.com';
   const demoPassword = 'password123';
   
+  /* eslint-disable prefer-const */
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   let { data: authData, error: authError }: { data: any; error: any } = await supabase.auth.signInWithPassword({
     email: demoEmail,
     password: demoPassword,
@@ -176,7 +178,7 @@ async function seed() {
   const bidder1 = bidders[0];
   const reqPan = requirements.find(r => r.title.includes('PAN'))!;
   
-  const { data: doc1, error: doc1Error } = await supabase
+  const { data: doc1 } = await supabase
     .from('bidder_documents')
     .insert({
       bidder_id: bidder1.id,

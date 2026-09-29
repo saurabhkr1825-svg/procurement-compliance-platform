@@ -2,6 +2,7 @@ import { ComplianceEngine } from '../core/engine';
 import { MockRequirementExtractionProvider, MockEvidenceExtractionProvider } from '../core/providers/extraction/mock';
 import { PanVerificationAdapter, DebarmentVerificationAdapter } from '../core/providers/verification/adapters';
 import { DocumentProcessingPipeline } from '../core/pipeline';
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 import { ComplianceState, VerificationState } from '../core/domain/types';
 
 async function runAcceptanceTest() {
@@ -24,7 +25,7 @@ async function runAcceptanceTest() {
     ...req,
     id: `REQ-${i}`,
     packVersionId: 'PACK-v1'
-  })) as any[];
+  })) as any[] /* eslint-disable-line @typescript-eslint/no-explicit-any */;
   
   console.log(`Extracted ${requirements.length} rules. Pack Frozen as v1.`);
 

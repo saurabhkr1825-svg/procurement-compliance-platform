@@ -1,9 +1,12 @@
 import { createClient } from "@/utils/supabase/server"
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { FileDown, Printer } from "lucide-react"
+
+import { createHash } from "crypto"
 
 export default async function ReportPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -17,9 +20,9 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
     .eq('tender_id', id)
 
   // In MVP, we just display the report on-screen, with a button to "Print" which uses browser print.
-  // The structure includes all PRD requirements for the report payload.
-
-  const reportHash = "RPT-" + Date.now().toString(16).toUpperCase()
+  const reportData = { tender, bidders };
+  const hash = createHash("sha256").update(JSON.stringify(reportData)).digest("hex").substring(0, 8).toUpperCase();
+  const reportHash = "RPT-" + hash;
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto pb-12">
@@ -108,7 +111,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                     {(!bidder.compliance_results || bidder.compliance_results.length === 0) ? (
                       <TableRow><TableCell colSpan={4} className="text-center">No compliance evaluations.</TableCell></TableRow>
                     ) : (
-                      bidder.compliance_results.map((res: any) => (
+                      bidder.compliance_results.map((res: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => (
                         <TableRow key={res.id}>
                           <TableCell className="font-medium max-w-[200px] truncate">{res.requirements?.title}</TableCell>
                           <TableCell>{res.requirements?.category}</TableCell>

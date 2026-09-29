@@ -23,7 +23,7 @@ export interface VerificationResult {
   identifierType: string;
   identifierValue: string;
   resultStatus: VerificationState;
-  verifiedData?: any;
+  verifiedData?: any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
 }
 
 export interface ExtractedEvidence {

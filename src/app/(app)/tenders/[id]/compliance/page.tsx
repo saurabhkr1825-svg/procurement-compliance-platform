@@ -21,7 +21,7 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
     // Since we don't have a direct tender_id on compliance_results, we rely on requirements.tender_id or bidders.tender_id
 
   // We filter in JS for the MVP to keep DB queries simple without custom views
-  const filteredResults = results?.filter((r: any) => r.requirements?.tender_id === id || r.bidders?.tender_id === id) || []
+  const filteredResults = results?.filter((r: { requirements?: { tender_id?: string }, bidders?: { tender_id?: string } }) => r.requirements?.tender_id === id || r.bidders?.tender_id === id) || []
 
   function getStatusIcon(status: string) {
     switch (status) {
@@ -78,7 +78,7 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredResults.map((res: any) => (
+                  filteredResults.map((res: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => (
                     <TableRow key={res.id}>
                       <TableCell className="font-medium">{res.bidders?.legal_name}</TableCell>
                       <TableCell>

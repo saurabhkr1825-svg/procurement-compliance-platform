@@ -6,7 +6,7 @@ import { RequirementExtractionProvider, EvidenceExtractionProvider } from './ind
  * Adheres to the interface to allow swapping with an LLM implementation later.
  */
 export class MockRequirementExtractionProvider implements RequirementExtractionProvider {
-  async extractRequirements(documentText: string): Promise<Partial<Requirement>[]> {
+  async extractRequirements(_documentText: string /* eslint-disable-line @typescript-eslint/no-unused-vars */): Promise<Partial<Requirement>[]> {
     // Simulate AI extraction delay
     await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -40,7 +40,7 @@ export class MockRequirementExtractionProvider implements RequirementExtractionP
 }
 
 export class MockEvidenceExtractionProvider implements EvidenceExtractionProvider {
-  async extractEvidence(documentText: string, requirements: Requirement[]): Promise<ExtractedEvidence[]> {
+  async extractEvidence(_documentText: string  , _requirements: Requirement[] /* eslint-disable-line @typescript-eslint/no-unused-vars */): Promise<ExtractedEvidence[]> {
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     // For the mock, we just return static mock evidence that matches the typical requirements

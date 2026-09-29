@@ -15,7 +15,7 @@ export interface AuditEventPayload {
   tenderId: string;
   bidderId?: string;
   action: AuditAction;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface AuditRepository {

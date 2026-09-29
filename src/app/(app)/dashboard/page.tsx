@@ -133,10 +133,10 @@ export default async function DashboardPage() {
                         {new Date(activity.created_at).toLocaleString()}
                       </p>
                       {activity.tenders && (
-                        <p className="text-xs mt-1">Tender: {(activity.tenders as any).title}</p>
+                        <p className="text-xs mt-1">Tender: {(activity.tenders as { title: string }).title}</p>
                       )}
                       {activity.bidders && (
-                        <p className="text-xs mt-1">Bidder: {(activity.bidders as any).legal_name}</p>
+                        <p className="text-xs mt-1">Bidder: {(activity.bidders as { legal_name: string }).legal_name}</p>
                       )}
                     </div>
                   </div>
