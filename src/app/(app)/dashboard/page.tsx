@@ -43,11 +43,11 @@ export default async function DashboardPage() {
 
   function getStatusStyle(status: string) {
     switch (status) {
-      case 'REVIEW': return "bg-amber-50 text-amber-700 border-amber-200"
+      case 'REVIEW': return "bg-[#FFF7ED] text-[#C2410C]"
       case 'NOT VERIFIED':
-      case 'NOT_VERIFIED': return "bg-slate-100 text-slate-600 border-slate-200"
-      case 'FAIL': return "bg-red-50 text-red-700 border-red-200"
-      default: return "bg-slate-100 text-slate-800 border-slate-200"
+      case 'NOT_VERIFIED': return "bg-[#F1F5F9] text-[#475569]"
+      case 'FAIL': return "bg-[#FEF2F2] text-[#B91C1C]"
+      default: return "bg-[#F1F5F9] text-[#475569]"
     }
   }
 

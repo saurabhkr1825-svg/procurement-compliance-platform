@@ -22,11 +22,11 @@ export default async function TendersPage() {
 
   function getStatusBadge(status: string) {
     switch (status) {
-      case 'DRAFT': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">DRAFT</span>
-      case 'ACTIVE': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">ACTIVE</span>
-      case 'EVALUATION': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">EVALUATION</span>
-      case 'COMPLETED': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700 border border-green-200">COMPLETED</span>
-      default: return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">{status}</span>
+      case 'DRAFT': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#F1F5F9] text-[#475569]">DRAFT</span>
+      case 'ACTIVE': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#DCE9F8] text-[#2563EB]">ACTIVE</span>
+      case 'EVALUATION': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#FFF7ED] text-[#C2410C]">EVALUATION</span>
+      case 'COMPLETED': return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#ECFDF3] text-[#15803D]">COMPLETED</span>
+      default: return <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#F1F5F9] text-[#475569]">{status}</span>
     }
   }
 

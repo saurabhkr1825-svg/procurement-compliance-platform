@@ -43,11 +43,11 @@ export default async function BidderWorkspacePage({
 
   function getStatusBadge(status: string) {
     switch (status) {
-      case 'PASS': return <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-green-50 text-green-700 border border-green-200 uppercase">PASS</span>
-      case 'FAIL': return <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-red-50 text-red-700 border border-red-200 uppercase">FAIL</span>
-      case 'REVIEW': return <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-amber-50 text-amber-700 border border-amber-200 uppercase">REVIEW</span>
+      case 'PASS': return <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-[#ECFDF3] text-[#15803D] uppercase">PASS</span>
+      case 'FAIL': return <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-[#FEF2F2] text-[#B91C1C] uppercase">FAIL</span>
+      case 'REVIEW': return <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-[#FFF7ED] text-[#C2410C] uppercase">REVIEW</span>
       case 'NOT VERIFIED':
-      case 'NOT_VERIFIED': return <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-slate-100 text-slate-600 border border-slate-200 uppercase">NOT VERIFIED</span>
+      case 'NOT_VERIFIED': return <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-[#F1F5F9] text-[#475569] uppercase">NOT VERIFIED</span>
       default: return <Badge variant="outline">{status}</Badge>
     }
   }

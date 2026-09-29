@@ -23,10 +23,10 @@ export default async function ReviewQueuePage() {
 
   function getStatusStyle(status: string) {
     switch (status) {
-      case 'REVIEW': return "bg-amber-50 text-amber-700 border-amber-200"
+      case 'REVIEW': return "bg-[#FFF7ED] text-[#C2410C]"
       case 'NOT VERIFIED':
-      case 'NOT_VERIFIED': return "bg-slate-100 text-slate-600 border-slate-200"
-      default: return "bg-slate-100 text-slate-800 border-slate-200"
+      case 'NOT_VERIFIED': return "bg-[#F1F5F9] text-[#475569]"
+      default: return "bg-[#F1F5F9] text-[#475569]"
     }
   }
 

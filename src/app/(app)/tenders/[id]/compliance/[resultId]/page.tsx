@@ -40,11 +40,11 @@ export default async function EvidenceViewerPage({
 
   function getStatusBadge(status: string) {
     switch (status) {
-      case 'PASS': return <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold bg-green-50 text-green-700 border border-green-200">{getStatusIcon('PASS')} PASS</span>
-      case 'FAIL': return <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold bg-red-50 text-red-700 border border-red-200">{getStatusIcon('FAIL')} FAIL</span>
-      case 'REVIEW': return <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold bg-amber-50 text-amber-700 border border-amber-200">{getStatusIcon('REVIEW')} REVIEW</span>
+      case 'PASS': return <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold bg-[#ECFDF3] text-[#15803D]">{getStatusIcon('PASS')} PASS</span>
+      case 'FAIL': return <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold bg-[#FEF2F2] text-[#B91C1C]">{getStatusIcon('FAIL')} FAIL</span>
+      case 'REVIEW': return <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold bg-[#FFF7ED] text-[#C2410C]">{getStatusIcon('REVIEW')} REVIEW</span>
       case 'NOT VERIFIED':
-      case 'NOT_VERIFIED': return <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold bg-slate-100 text-slate-600 border border-slate-200">{getStatusIcon('NOT VERIFIED')} NOT VERIFIED</span>
+      case 'NOT_VERIFIED': return <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold bg-[#F1F5F9] text-[#475569]">{getStatusIcon('NOT VERIFIED')} NOT VERIFIED</span>
       default: return <Badge variant="outline">{status}</Badge>
     }
   }

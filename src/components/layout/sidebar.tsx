@@ -28,7 +28,7 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <div className="hidden md:flex h-full w-[240px] flex-col border-r border-slate-200 bg-[#F5F6F7]">
+    <div className="hidden md:flex h-full w-[240px] flex-col border-r border-border bg-background">
       <div className="flex h-16 items-center px-6 pt-4 mb-4">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm">
@@ -47,14 +47,14 @@ export function Sidebar() {
               className={cn(
                 "group flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive 
-                  ? "bg-blue-50 text-blue-700" 
-                  : "text-slate-600 hover:bg-slate-200/50 hover:text-slate-900"
+                  ? "bg-secondary text-primary" 
+                  : "text-muted-foreground hover:bg-secondary hover:text-primary"
               )}
             >
               <item.icon
                 className={cn(
                   "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
-                  isActive ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
+                  isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary"
                 )}
                 aria-hidden="true"
               />

@@ -89,32 +89,32 @@ export default function NewTenderPage() {
             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-0.5 bg-slate-100 -z-10"></div>
             
             {/* Step 1 (Active) */}
-            <div className="flex flex-col items-center gap-2 bg-[#F5F6F7] px-2">
-              <div className="h-8 w-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold shadow-sm ring-4 ring-[#F5F6F7]">
+            <div className="flex flex-col items-center gap-2 bg-background px-2">
+              <div className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold shadow-sm ring-4 ring-background">
                 1
               </div>
-              <span className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Tender Details</span>
+              <span className="text-xs font-semibold text-primary uppercase tracking-wide">Tender Details</span>
             </div>
             
             {/* Step 2 (Inactive) */}
-            <div className="flex flex-col items-center gap-2 bg-[#F5F6F7] px-2">
-              <div className="h-8 w-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold ring-4 ring-[#F5F6F7]">
+            <div className="flex flex-col items-center gap-2 bg-background px-2">
+              <div className="h-8 w-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold ring-4 ring-background">
                 2
               </div>
               <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">Documents</span>
             </div>
             
             {/* Step 3 (Inactive) */}
-            <div className="flex flex-col items-center gap-2 bg-[#F5F6F7] px-2 hidden sm:flex">
-              <div className="h-8 w-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold ring-4 ring-[#F5F6F7]">
+            <div className="flex flex-col items-center gap-2 bg-background px-2 hidden sm:flex">
+              <div className="h-8 w-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold ring-4 ring-background">
                 3
               </div>
               <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">Requirement Pack</span>
             </div>
             
             {/* Step 4 (Inactive) */}
-            <div className="flex flex-col items-center gap-2 bg-[#F5F6F7] px-2">
-              <div className="h-8 w-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold ring-4 ring-[#F5F6F7]">
+            <div className="flex flex-col items-center gap-2 bg-background px-2">
+              <div className="h-8 w-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold ring-4 ring-background">
                 4
               </div>
               <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">Review & Freeze</span>
