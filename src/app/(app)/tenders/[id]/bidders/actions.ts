@@ -10,13 +10,13 @@ export async function createBidder(tenderId: string, formData: FormData) {
     return { error: "Unauthorized" }
   }
 
-  const legal_name = formData.get("legal_name")?.toString()
-  const registration_number = formData.get("registration_number")?.toString()
-  const pan = formData.get("pan")?.toString()
-  const gstin = formData.get("gstin")?.toString()
-  const registered_address = formData.get("registered_address")?.toString()
-  const contact_email = formData.get("contact_email")?.toString()
-  const contact_phone = formData.get("contact_phone")?.toString()
+  const legal_name = formData.get("legal_name")?.toString().trim()
+  const registration_number = formData.get("registration_number")?.toString().trim()
+  const pan = formData.get("pan")?.toString().trim()
+  const gstin = formData.get("gstin")?.toString().trim()
+  const registered_address = formData.get("registered_address")?.toString().trim()
+  const contact_email = formData.get("contact_email")?.toString().trim()
+  const contact_phone = formData.get("contact_phone")?.toString().trim()
 
   if (!legal_name) {
     return { error: "Legal Name is required" }

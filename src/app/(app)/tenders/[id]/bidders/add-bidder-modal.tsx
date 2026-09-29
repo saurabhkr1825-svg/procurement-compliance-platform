@@ -16,18 +16,26 @@ export function AddBidderModal({ tenderId }: { tenderId: string }) {
     setError(null)
     
     // Client-side validations
-    const pan = formData.get("pan")?.toString()
-    if (pan && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan)) {
-      setError("Invalid PAN format.")
-      setLoading(false)
-      return
+    let pan = formData.get("pan")?.toString().trim()
+    if (pan) {
+      pan = pan.toUpperCase()
+      if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan)) {
+        setError("Invalid PAN format.")
+        setLoading(false)
+        return
+      }
+      formData.set("pan", pan)
     }
 
-    const gstin = formData.get("gstin")?.toString()
-    if (gstin && gstin.length !== 15) {
-      setError("Invalid GSTIN format (must be 15 characters).")
-      setLoading(false)
-      return
+    let gstin = formData.get("gstin")?.toString().trim()
+    if (gstin) {
+      gstin = gstin.toUpperCase()
+      if (gstin.length !== 15) {
+        setError("Invalid GSTIN format (must be 15 characters).")
+        setLoading(false)
+        return
+      }
+      formData.set("gstin", gstin)
     }
     
     const result = await createBidder(tenderId, formData)
