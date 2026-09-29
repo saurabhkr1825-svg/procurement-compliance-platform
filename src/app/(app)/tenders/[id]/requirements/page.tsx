@@ -27,9 +27,9 @@ export default async function RequirementsPage({ params }: { params: Promise<{ i
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 bg-slate-50 p-6 rounded-lg border border-slate-200 shadow-sm">
+      <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
         <div className="flex items-start gap-4">
-          <div className="bg-blue-100 p-3 rounded-lg border border-blue-200">
+          <div className="bg-blue-50 p-3 rounded-xl border border-blue-100">
             <FileSignature className="h-6 w-6 text-blue-700" />
           </div>
           <div>
@@ -76,7 +76,7 @@ export default async function RequirementsPage({ params }: { params: Promise<{ i
         </div>
       </div>
 
-      <Card className="border-slate-200 shadow-sm overflow-hidden">
+      <Card className="border-slate-200 shadow-sm overflow-hidden bg-white rounded-2xl">
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <Table>

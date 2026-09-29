@@ -69,8 +69,8 @@ export default async function EvidenceViewerPage({
       <div className="flex-1 grid md:grid-cols-2 gap-6 h-full min-h-0">
         {/* Left Side: Extracted Evidence and Rationale */}
         <div className="space-y-6 overflow-y-auto pr-2 pb-8">
-          <Card className="border-slate-200 shadow-sm overflow-hidden">
-            <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
+          <Card className="border-slate-200 shadow-sm overflow-hidden bg-white rounded-2xl">
+            <CardHeader className="bg-white border-b border-slate-100 pb-4">
               <div className="flex justify-between items-start">
                 <div>
                   <CardTitle className="text-base font-semibold text-slate-800">Compliance State</CardTitle>
@@ -120,8 +120,8 @@ export default async function EvidenceViewerPage({
             </CardContent>
           </Card>
 
-          <Card className="border-slate-200 shadow-sm">
-            <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
+          <Card className="border-slate-200 shadow-sm bg-white rounded-2xl overflow-hidden">
+            <CardHeader className="bg-white border-b border-slate-100 pb-4">
               <CardTitle className="text-base font-semibold text-slate-800 flex items-center gap-2">
                 <FileCheck className="h-4 w-4 text-blue-600" /> Verification Protocol
               </CardTitle>
@@ -144,8 +144,8 @@ export default async function EvidenceViewerPage({
         </div>
 
         {/* Right Side: Document Preview */}
-        <div className="h-full border border-slate-200 rounded-lg overflow-hidden flex flex-col bg-slate-50 shadow-sm">
-          <div className="p-3 border-b border-slate-200 bg-white flex justify-between items-center">
+        <div className="h-full border border-slate-200 rounded-2xl overflow-hidden flex flex-col bg-white shadow-sm">
+          <div className="p-3 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
             <div>
               <p className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <FileText className="h-4 w-4 text-slate-400" />

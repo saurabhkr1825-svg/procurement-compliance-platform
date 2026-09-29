@@ -85,8 +85,8 @@ export default async function OfficerDecisionPage({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border-slate-200 shadow-sm">
-          <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
+        <Card className="border-slate-200 shadow-sm bg-white rounded-2xl overflow-hidden">
+          <CardHeader className="bg-white border-b border-slate-100 pb-4">
             <CardTitle className="text-base font-semibold text-slate-800 flex items-center">
               <ShieldCheck className="h-4 w-4 mr-2 text-slate-500" /> System Evaluation Summary
             </CardTitle>
@@ -127,8 +127,8 @@ export default async function OfficerDecisionPage({
           </CardContent>
         </Card>
 
-        <Card className="border-slate-200 shadow-sm">
-          <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
+        <Card className="border-slate-200 shadow-sm bg-white rounded-2xl overflow-hidden">
+          <CardHeader className="bg-white border-b border-slate-100 pb-4">
             <CardTitle className="text-base font-semibold text-slate-800 flex items-center">
               <Lock className="h-4 w-4 mr-2 text-blue-600" /> Officer Authority
             </CardTitle>

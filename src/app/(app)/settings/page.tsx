@@ -13,16 +13,16 @@ export default async function SettingsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 pb-12">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
-        <p className="text-muted-foreground">Manage your account and platform preferences.</p>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Settings</h1>
+        <p className="text-slate-500 mt-1">Manage your account and platform preferences.</p>
       </div>
 
       <div className="grid gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Profile</CardTitle>
+        <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden">
+          <CardHeader className="border-b border-slate-100 bg-white pb-4">
+            <CardTitle className="text-base font-bold text-slate-900">Profile</CardTitle>
             <CardDescription>Update your personal information.</CardDescription>
           </CardHeader>
           <CardContent>
@@ -30,9 +30,9 @@ export default async function SettingsPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Organization</CardTitle>
+        <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden">
+          <CardHeader className="border-b border-slate-100 bg-white pb-4">
+            <CardTitle className="text-base font-bold text-slate-900">Organization</CardTitle>
             <CardDescription>Manage organization details and team members.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -40,9 +40,9 @@ export default async function SettingsPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Application</CardTitle>
+        <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden">
+          <CardHeader className="border-b border-slate-100 bg-white pb-4">
+            <CardTitle className="text-base font-bold text-slate-900">Application</CardTitle>
             <CardDescription>Configure system-wide preferences.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

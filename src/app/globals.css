@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --color-border: var(--border);
   --color-input: var(--input);
@@ -38,66 +38,60 @@
 }
 
 :root {
-  --background: #f8fafc; /* Slate 50 */
-  --foreground: #0f172a; /* Slate 900 */
+  --background: #F5F6F7; /* Light gray professional SaaS background */
+  --foreground: #111827; /* Very dark gray primary text */
   
-  --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card: #FFFFFF;
+  --card-foreground: #111827;
   
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  --popover: #FFFFFF;
+  --popover-foreground: #111827;
   
-  --primary: #1e3a8a; /* Blue 900 */
-  --primary-foreground: #ffffff;
+  --primary: #2563EB; /* Blue 600 - Primary action */
+  --primary-foreground: #FFFFFF;
   
-  --secondary: #e2e8f0; /* Slate 200 */
-  --secondary-foreground: #0f172a;
+  --secondary: #F3F4F6; /* Gray 100 */
+  --secondary-foreground: #111827;
   
-  --muted: #f1f5f9; /* Slate 100 */
-  --muted-foreground: #475569; /* Slate 600 */
+  --muted: #F9FAFB; /* Gray 50 */
+  --muted-foreground: #6B7280; /* Gray 500 - Secondary text */
   
-  --accent: #e0f2fe; /* Sky 100 */
-  --accent-foreground: #0369a1; /* Sky 700 */
+  --accent: #EFF6FF; /* Blue 50 */
+  --accent-foreground: #1D4ED8; /* Blue 700 */
   
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
+  --destructive: #DC2626; /* Red 600 */
+  --destructive-foreground: #FFFFFF;
   
-  --border: #cbd5e1; /* Slate 300 */
-  --input: #cbd5e1;
-  --ring: #1e3a8a;
+  --border: #E5E7EB; /* Gray 200 - Subtle borders */
+  --input: #E5E7EB;
+  --ring: #2563EB; /* Focus ring */
   
-  --radius: 0.375rem; /* Reduced for institutional feel */
+  --radius: 0.875rem; /* 14px rounded corners */
 }
 
+/* Hardcode out dark mode for now as per enterprise light UI instruction */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #09090b;
-    --foreground: #f8fafc;
-    
-    --card: #111827; /* Gray 900 */
-    --card-foreground: #f8fafc;
-    
-    --popover: #111827;
-    --popover-foreground: #f8fafc;
-    
-    --primary: #3b82f6; /* Blue 500 */
-    --primary-foreground: #ffffff;
-    
-    --secondary: #1e293b; /* Slate 800 */
-    --secondary-foreground: #f8fafc;
-    
-    --muted: #0f172a; /* Slate 900 */
-    --muted-foreground: #94a3b8; /* Slate 400 */
-    
-    --accent: #1e293b;
-    --accent-foreground: #3b82f6;
-    
-    --destructive: #7f1d1d;
-    --destructive-foreground: #f8fafc;
-    
-    --border: #334155;
-    --input: #334155;
-    --ring: #3b82f6;
+    /* Falling back to light mode variables to force light mode */
+    --background: #F5F6F7;
+    --foreground: #111827;
+    --card: #FFFFFF;
+    --card-foreground: #111827;
+    --popover: #FFFFFF;
+    --popover-foreground: #111827;
+    --primary: #2563EB;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F3F4F6;
+    --secondary-foreground: #111827;
+    --muted: #F9FAFB;
+    --muted-foreground: #6B7280;
+    --accent: #EFF6FF;
+    --accent-foreground: #1D4ED8;
+    --destructive: #DC2626;
+    --destructive-foreground: #FFFFFF;
+    --border: #E5E7EB;
+    --input: #E5E7EB;
+    --ring: #2563EB;
   }
 }
 
@@ -108,5 +102,6 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
+    font-family: var(--font-inter), sans-serif;
   }
 }

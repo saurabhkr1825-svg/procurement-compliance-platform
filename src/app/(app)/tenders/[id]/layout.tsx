@@ -25,7 +25,7 @@ export default async function TenderLayout({
 
   return (
     <div className="space-y-6">
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">{tender.title}</h1>

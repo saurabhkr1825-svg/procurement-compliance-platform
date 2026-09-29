@@ -7,16 +7,19 @@ import { cn } from "@/lib/utils"
 import { 
   LayoutDashboard, 
   FileText, 
-  BarChart3, 
+  ClipboardCheck, 
+  ShieldCheck, 
+  FileBarChart, 
   Activity, 
   Settings,
-  ShieldCheck
 } from "lucide-react"
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Tenders', href: '/tenders', icon: FileText },
-  { name: 'Reports', href: '/reports', icon: BarChart3 },
+  { name: 'Review Queue', href: '/review-queue', icon: ClipboardCheck },
+  { name: 'Compliance', href: '/compliance', icon: ShieldCheck },
+  { name: 'Reports', href: '/reports', icon: FileBarChart },
   { name: 'Activity', href: '/activity', icon: Activity },
   { name: 'Settings', href: '/settings', icon: Settings },
 ]
@@ -25,30 +28,33 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <div className="hidden md:flex h-full w-64 flex-col border-r bg-slate-900 text-slate-100 shadow-sm">
-      <div className="flex h-16 items-center border-b border-slate-800 px-6">
-        <ShieldCheck className="h-6 w-6 text-blue-500 mr-3" />
-        <span className="text-lg font-bold tracking-tight">ProcureAI</span>
+    <div className="hidden md:flex h-full w-[240px] flex-col border-r border-slate-200 bg-[#F5F6F7]">
+      <div className="flex h-16 items-center px-6 pt-4 mb-4">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm">
+            <ShieldCheck className="h-5 w-5 text-white" />
+          </div>
+          <span className="text-xl font-bold tracking-tight text-slate-900">ProcureAI</span>
+        </div>
       </div>
-      <nav className="flex-1 space-y-1.5 px-4 py-6">
-        <div className="text-xs font-semibold text-slate-500 mb-4 px-2 tracking-wider uppercase">Workspace</div>
+      <nav className="flex-1 space-y-1.5 px-4 overflow-y-auto">
         {navigation.map((item) => {
-          const isActive = pathname.startsWith(item.href)
+          const isActive = pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')
           return (
             <Link
               key={item.name}
               href={item.href}
               className={cn(
-                "group flex items-center rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
+                "group flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive 
-                  ? "bg-blue-600 text-white shadow-sm" 
-                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                  ? "bg-blue-50 text-blue-700" 
+                  : "text-slate-600 hover:bg-slate-200/50 hover:text-slate-900"
               )}
             >
               <item.icon
                 className={cn(
                   "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
-                  isActive ? "text-blue-100" : "text-slate-400 group-hover:text-slate-200"
+                  isActive ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
                 )}
                 aria-hidden="true"
               />
@@ -57,10 +63,16 @@ export function Sidebar() {
           )
         })}
       </nav>
-      <div className="p-4 border-t border-slate-800">
-        <div className="rounded-md bg-slate-800 p-3 text-xs text-slate-400">
-          <p className="font-medium text-slate-300 mb-1">Secure Environment</p>
-          <p>Actions are logged in the immutable audit trail.</p>
+      <div className="p-4 border-t border-slate-200">
+        <div className="flex items-center gap-3 px-2 py-2">
+          <div className="h-9 w-9 rounded-full bg-slate-200 flex items-center justify-center overflow-hidden">
+            {/* Placeholder for User Avatar image */}
+            <span className="text-sm font-bold text-slate-600">S</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm font-bold text-slate-900">Saurabh</span>
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Procurement Officer</span>
+          </div>
         </div>
       </div>
     </div>

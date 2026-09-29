@@ -57,25 +57,29 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="bg-green-50/50 border-green-200 shadow-sm">
+        <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden relative">
+          <div className="absolute inset-x-0 top-0 h-1 bg-green-500"></div>
           <CardContent className="p-4 flex flex-col items-center justify-center">
             <span className="text-3xl font-bold text-green-700">{summary.PASS}</span>
             <span className="text-xs font-medium text-green-600 uppercase tracking-wider mt-1">PASS</span>
           </CardContent>
         </Card>
-        <Card className="bg-red-50/50 border-red-200 shadow-sm">
+        <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden relative">
+          <div className="absolute inset-x-0 top-0 h-1 bg-red-500"></div>
           <CardContent className="p-4 flex flex-col items-center justify-center">
             <span className="text-3xl font-bold text-red-700">{summary.FAIL}</span>
             <span className="text-xs font-medium text-red-600 uppercase tracking-wider mt-1">FAIL</span>
           </CardContent>
         </Card>
-        <Card className="bg-amber-50/50 border-amber-200 shadow-sm">
+        <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden relative">
+          <div className="absolute inset-x-0 top-0 h-1 bg-amber-500"></div>
           <CardContent className="p-4 flex flex-col items-center justify-center">
             <span className="text-3xl font-bold text-amber-700">{summary.REVIEW}</span>
             <span className="text-xs font-medium text-amber-600 uppercase tracking-wider mt-1">REVIEW</span>
           </CardContent>
         </Card>
-        <Card className="bg-slate-50 border-slate-200 shadow-sm">
+        <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden relative">
+          <div className="absolute inset-x-0 top-0 h-1 bg-slate-300"></div>
           <CardContent className="p-4 flex flex-col items-center justify-center">
             <span className="text-3xl font-bold text-slate-700">{summary.NOT_VERIFIED}</span>
             <span className="text-xs font-medium text-slate-500 uppercase tracking-wider mt-1 text-center">NOT VERIFIED</span>
@@ -83,8 +87,8 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
         </Card>
       </div>
 
-      <Card className="border-slate-200 shadow-sm">
-        <CardHeader className="border-b border-slate-100 bg-slate-50/50 pb-4">
+      <Card className="border-slate-200 shadow-sm bg-white rounded-2xl overflow-hidden">
+        <CardHeader className="border-b border-slate-100 bg-white pb-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <CardTitle className="text-lg font-bold text-slate-900">Compliance Matrix</CardTitle>
@@ -111,6 +115,7 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
                   <TableHead className="font-semibold text-slate-700 h-11">Result</TableHead>
                   <TableHead className="font-semibold text-slate-700 h-11 w-1/3">Extracted Evidence</TableHead>
                   <TableHead className="font-semibold text-slate-700 h-11">Provenance</TableHead>
+                  <TableHead className="font-semibold text-slate-700 h-11 text-right">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -125,7 +130,7 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredResults.map((res: { id: string; result: string; reason: string; evidence: string; requirements?: { title: string; description: string; category: string; requirement_type: string }; bidders?: { legal_name: string }; bidder_documents?: { file_name: string } }) => (
+                  filteredResults.map((res: { id: string; result: string; reason: string; evidence: string; requirements?: { title: string; description: string; category: string; requirement_type: string; tender_id: string }; bidders?: { legal_name: string }; bidder_documents?: { file_name: string } }) => (
                     <TableRow key={res.id} className="hover:bg-slate-50/80 transition-colors border-b border-slate-100 last:border-0">
                       <TableCell className="align-top py-4">
                         <div className="font-semibold text-slate-900 text-sm mb-1">{res.requirements?.title}</div>
@@ -148,6 +153,13 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
                             {res.bidder_documents?.file_name || 'Verification Source'}
                           </span>
                         </div>
+                      </TableCell>
+                      <TableCell className="align-top py-4 text-right">
+                        <Button variant="outline" size="sm" asChild className="bg-white border-slate-200">
+                          <a href={`/tenders/${res.requirements?.tender_id}/compliance/${res.id}`}>
+                            {res.result === 'REVIEW' || res.result === 'NOT VERIFIED' || res.result === 'NOT_VERIFIED' ? 'Review' : 'Inspect'}
+                          </a>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))

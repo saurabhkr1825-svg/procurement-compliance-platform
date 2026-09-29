@@ -56,7 +56,7 @@ export default async function TendersPage() {
         </Button>
       </div>
 
-      <Card className="border-slate-200 shadow-sm overflow-hidden bg-white">
+      <Card className="border-slate-200 shadow-sm overflow-hidden bg-white rounded-2xl">
         <CardContent className="p-0">
           {!tenders || tenders.length === 0 ? (
             <div className="py-12">
