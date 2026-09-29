@@ -17,7 +17,7 @@ export async function Header() {
   return (
     <header className="flex h-16 items-center justify-between border-b bg-white px-6 shadow-sm z-10">
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" className="md:hidden">
+        <Button variant="ghost" size="sm" className="md:hidden h-9 w-9 px-0">
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle menu</span>
         </Button>
@@ -26,7 +26,7 @@ export async function Header() {
         </div>
       </div>
       <div className="flex items-center gap-6">
-        <Button variant="ghost" size="icon" className="relative text-slate-500 hover:text-slate-700 hover:bg-slate-100">
+        <Button variant="ghost" size="sm" className="relative h-9 w-9 px-0 text-slate-500 hover:text-slate-700 hover:bg-slate-100">
           <Bell className="h-5 w-5" />
           <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500 border-2 border-white"></span>
           <span className="sr-only">Notifications</span>
@@ -44,7 +44,7 @@ export async function Header() {
               </div>
             </div>
             <form action={logout}>
-              <Button variant="ghost" size="icon" type="submit" className="text-slate-400 hover:text-red-600 hover:bg-red-50" title="Log out">
+              <Button variant="ghost" size="sm" type="submit" className="h-9 w-9 px-0 text-slate-400 hover:text-red-600 hover:bg-red-50" title="Log out">
                 <LogOut className="h-4 w-4" />
                 <span className="sr-only">Log out</span>
               </Button>
