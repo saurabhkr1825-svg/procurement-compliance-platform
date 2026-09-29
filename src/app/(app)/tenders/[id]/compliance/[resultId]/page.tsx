@@ -60,7 +60,7 @@ export default async function EvidenceViewerPage({
             </Link>
           </Button>
           <h2 className="text-xl font-bold flex items-center gap-2 text-slate-900">
-            <Microscope className="h-5 w-5 text-blue-600" />
+            <Microscope className="h-5 w-5 text-primary" />
             Evidence Viewer
           </h2>
         </div>
@@ -89,7 +89,7 @@ export default async function EvidenceViewerPage({
                 </div>
                 <div className="flex items-center justify-between mt-2 px-1">
                   <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 font-medium tracking-tight">AI EXTRACTED</Badge>
+                    <Badge variant="outline" className="bg-accent text-primary border-primary/30 font-medium tracking-tight">AI EXTRACTED</Badge>
                   </div>
                   {result.confidence && (
                     <span className="text-xs font-medium text-slate-500">Confidence: <strong className="text-slate-700">{(result.confidence * 100).toFixed(0)}%</strong></span>
@@ -123,7 +123,7 @@ export default async function EvidenceViewerPage({
           <Card className="border-slate-200 shadow-sm bg-white rounded-2xl overflow-hidden">
             <CardHeader className="bg-white border-b border-slate-100 pb-4">
               <CardTitle className="text-base font-semibold text-slate-800 flex items-center gap-2">
-                <FileCheck className="h-4 w-4 text-blue-600" /> Verification Protocol
+                <FileCheck className="h-4 w-4 text-primary" /> Verification Protocol
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6 space-y-4">

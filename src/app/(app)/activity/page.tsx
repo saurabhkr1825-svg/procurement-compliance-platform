@@ -19,7 +19,7 @@ export default async function ActivityPage() {
 
   const getActionIcon = (action: string) => {
     if (action.includes('REPORT') || action.includes('COMPLIANCE')) return <ShieldCheck className="h-4 w-4 text-green-600" />
-    if (action.includes('DOCUMENT') || action.includes('EVIDENCE')) return <FileText className="h-4 w-4 text-blue-600" />
+    if (action.includes('DOCUMENT') || action.includes('EVIDENCE')) return <FileText className="h-4 w-4 text-primary" />
     if (action.includes('TENDER')) return <FileClock className="h-4 w-4 text-purple-600" />
     if (action.includes('OVERRIDE') || action.includes('DECISION')) return <AlertCircle className="h-4 w-4 text-amber-600" />
     return <Activity className="h-4 w-4 text-slate-500" />
@@ -27,7 +27,7 @@ export default async function ActivityPage() {
 
   const getActionColor = (action: string) => {
     if (action.includes('REPORT') || action.includes('COMPLIANCE')) return "bg-green-100 border-green-200"
-    if (action.includes('DOCUMENT') || action.includes('EVIDENCE')) return "bg-blue-100 border-blue-200"
+    if (action.includes('DOCUMENT') || action.includes('EVIDENCE')) return "bg-accent border-primary/30"
     if (action.includes('TENDER')) return "bg-purple-100 border-purple-200"
     if (action.includes('OVERRIDE') || action.includes('DECISION')) return "bg-amber-100 border-amber-200"
     return "bg-slate-100 border-slate-200"

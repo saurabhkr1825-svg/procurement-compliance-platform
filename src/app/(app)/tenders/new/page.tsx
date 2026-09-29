@@ -151,7 +151,7 @@ export default function NewTenderPage() {
                   id="title" 
                   name="title" 
                   placeholder="e.g. Supply of Smart Class Equipment" 
-                  className={`h-11 bg-white border-slate-200 focus-visible:ring-blue-600 ${formErrors.title ? 'border-red-300 focus-visible:ring-red-500 bg-red-50/20' : ''}`}
+                  className={`h-11 bg-white border-slate-200 focus-visible:ring-primary ${formErrors.title ? 'border-red-300 focus-visible:ring-red-500 bg-red-50/20' : ''}`}
                 />
                 {formErrors.title && <p className="text-xs font-medium text-red-600 mt-1">{formErrors.title}</p>}
               </div>
@@ -164,7 +164,7 @@ export default function NewTenderPage() {
                   id="reference_number" 
                   name="reference_number" 
                   placeholder="e.g. TNDR/2026/001" 
-                  className={`h-11 bg-white border-slate-200 focus-visible:ring-blue-600 ${formErrors.reference_number ? 'border-red-300 focus-visible:ring-red-500 bg-red-50/20' : ''}`}
+                  className={`h-11 bg-white border-slate-200 focus-visible:ring-primary ${formErrors.reference_number ? 'border-red-300 focus-visible:ring-red-500 bg-red-50/20' : ''}`}
                 />
                 {formErrors.reference_number && <p className="text-xs font-medium text-red-600 mt-1">{formErrors.reference_number}</p>}
               </div>
@@ -177,7 +177,7 @@ export default function NewTenderPage() {
                   id="organization" 
                   name="organization" 
                   placeholder="e.g. Ministry of Education" 
-                  className={`h-11 bg-white border-slate-200 focus-visible:ring-blue-600 ${formErrors.organization ? 'border-red-300 focus-visible:ring-red-500 bg-red-50/20' : ''}`}
+                  className={`h-11 bg-white border-slate-200 focus-visible:ring-primary ${formErrors.organization ? 'border-red-300 focus-visible:ring-red-500 bg-red-50/20' : ''}`}
                 />
                 {formErrors.organization && <p className="text-xs font-medium text-red-600 mt-1">{formErrors.organization}</p>}
               </div>
@@ -191,7 +191,7 @@ export default function NewTenderPage() {
                   name="description" 
                   placeholder="Brief description of the procurement scope, objectives, or key requirements..." 
                   rows={4} 
-                  className="bg-white border-slate-200 focus-visible:ring-blue-600 resize-y min-h-[100px]"
+                  className="bg-white border-slate-200 focus-visible:ring-primary resize-y min-h-[100px]"
                 />
               </div>
             </div>
@@ -215,7 +215,7 @@ export default function NewTenderPage() {
               <Button 
                 type="submit" 
                 disabled={loading}
-                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white shadow-sm h-11 px-6 font-medium"
+                className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white shadow-sm h-11 px-6 font-medium"
               >
                 {loading ? "Creating Workspace..." : (
                   <>

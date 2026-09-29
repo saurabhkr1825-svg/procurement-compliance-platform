@@ -37,7 +37,7 @@ export default async function TendersPage() {
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">Tender Workspace</h1>
           <p className="text-slate-500">Manage and evaluate your procurement tenders.</p>
         </div>
-        <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm">
+        <Button asChild className="bg-primary hover:bg-primary/90 text-white shadow-sm">
           <Link href="/tenders/new">
             <PlusCircle className="mr-2 h-4 w-4" />
             Create Tender
@@ -64,7 +64,7 @@ export default async function TendersPage() {
                 title="No tenders yet" 
                 description="Create your first tender to begin requirement extraction and bid evaluation." 
                 action={
-                  <Button asChild className="mt-4 bg-blue-600 hover:bg-blue-700">
+                  <Button asChild className="mt-4 bg-primary hover:bg-primary/90">
                     <Link href="/tenders/new">Create Tender</Link>
                   </Button>
                 }
@@ -88,14 +88,14 @@ export default async function TendersPage() {
                   {tenders.map((tender) => (
                     <TableRow key={tender.id} className="hover:bg-slate-50/80 transition-colors border-b border-slate-100 last:border-0 group">
                       <TableCell className="font-medium text-slate-600 text-sm">
-                        <Link href={`/tenders/${tender.id}`} className="hover:text-blue-600 hover:underline">
+                        <Link href={`/tenders/${tender.id}`} className="hover:text-primary hover:underline">
                           {tender.reference_number}
                         </Link>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <FileText className="h-4 w-4 text-slate-400" />
-                          <Link href={`/tenders/${tender.id}`} className="font-semibold text-slate-900 text-sm hover:text-blue-600">
+                          <Link href={`/tenders/${tender.id}`} className="font-semibold text-slate-900 text-sm hover:text-primary">
                             {tender.title}
                           </Link>
                         </div>
@@ -117,7 +117,7 @@ export default async function TendersPage() {
                         {new Date(tender.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm" asChild className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Button variant="ghost" size="sm" asChild className="text-primary hover:text-primary hover:bg-accent opacity-0 group-hover:opacity-100 transition-opacity">
                           <Link href={`/tenders/${tender.id}`}>
                             Workspace <ChevronRight className="ml-1 h-4 w-4" />
                           </Link>

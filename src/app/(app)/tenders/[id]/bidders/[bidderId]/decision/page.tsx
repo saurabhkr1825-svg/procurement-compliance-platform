@@ -75,8 +75,8 @@ export default async function OfficerDecisionPage({
       </div>
 
       <div className="flex items-start gap-4 pb-4 border-b border-slate-200">
-        <div className="bg-blue-100 p-3 rounded-lg border border-blue-200">
-          <FileCheck className="h-8 w-8 text-blue-700" />
+        <div className="bg-accent p-3 rounded-lg border border-primary/30">
+          <FileCheck className="h-8 w-8 text-primary" />
         </div>
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">Official Compliance Decision</h1>
@@ -130,15 +130,15 @@ export default async function OfficerDecisionPage({
         <Card className="border-slate-200 shadow-sm bg-white rounded-2xl overflow-hidden">
           <CardHeader className="bg-white border-b border-slate-100 pb-4">
             <CardTitle className="text-base font-semibold text-slate-800 flex items-center">
-              <Lock className="h-4 w-4 mr-2 text-blue-600" /> Officer Authority
+              <Lock className="h-4 w-4 mr-2 text-primary" /> Officer Authority
             </CardTitle>
             <CardDescription>Final decision override.</CardDescription>
           </CardHeader>
           <CardContent className="p-6">
             {existingDecision ? (
               <div className="space-y-4">
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800 flex items-start gap-3">
-                  <ShieldCheck className="h-5 w-5 mt-0.5 text-blue-600 flex-shrink-0" />
+                <div className="p-4 bg-accent border border-primary/30 rounded-lg text-sm text-primary/90 flex items-start gap-3">
+                  <ShieldCheck className="h-5 w-5 mt-0.5 text-primary flex-shrink-0" />
                   <div>
                     <strong className="block mb-1 text-base">Decision recorded by authorized officer</strong>
                     <p>A final decision has already been recorded for this bidder. Modifications require re-opening the evaluation phase.</p>
@@ -165,7 +165,7 @@ export default async function OfficerDecisionPage({
                   <select 
                     name="status" 
                     id="status"
-                    className="w-full flex h-10 w-full items-center justify-between rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full flex h-10 w-full items-center justify-between rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     required
                   >
                     <option value="">Select a status...</option>
@@ -183,14 +183,14 @@ export default async function OfficerDecisionPage({
                     name="summary" 
                     id="summary"
                     rows={4}
-                    className="flex min-h-[120px] w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex min-h-[120px] w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Provide justification for this decision. This will be included in the immutable audit log and final report."
                     required
                   />
                 </div>
 
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800 flex items-start gap-3">
-                  <ShieldCheck className="h-5 w-5 mt-0.5 text-blue-600 flex-shrink-0" />
+                <div className="p-4 bg-accent border border-primary/30 rounded-lg text-sm text-primary/90 flex items-start gap-3">
+                  <ShieldCheck className="h-5 w-5 mt-0.5 text-primary flex-shrink-0" />
                   <div>
                     <strong className="block mb-1">By submitting this form:</strong>
                     <ul className="list-disc pl-4 space-y-1 text-slate-700">
@@ -201,7 +201,7 @@ export default async function OfficerDecisionPage({
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 shadow-sm h-11 text-base font-medium">
+                <Button type="submit" className="w-full bg-primary hover:bg-primary/90 shadow-sm h-11 text-base font-medium">
                   Record Official Decision
                 </Button>
               </form>

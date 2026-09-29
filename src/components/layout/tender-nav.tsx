@@ -29,7 +29,7 @@ export function TenderNav({ id }: { id: string }) {
               className={cn(
                 "whitespace-nowrap border-b-2 py-3 text-sm font-medium transition-colors",
                 isActive
-                  ? "border-blue-600 text-blue-600"
+                  ? "border-primary text-primary"
                   : "border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700"
               )}
             >

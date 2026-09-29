@@ -49,7 +49,7 @@ export default async function ReviewQueuePage() {
       </div>
 
       <div className="flex items-center gap-2 overflow-x-auto pb-2">
-        <Button variant="default" className="bg-slate-900 text-white hover:bg-slate-800 rounded-full h-8 px-4 text-xs font-semibold">
+        <Button variant="default" className="bg-primary text-white hover:bg-primary/90 rounded-full h-8 px-4 text-xs font-semibold">
           All Items
         </Button>
         <Button variant="outline" className="bg-white text-slate-700 rounded-full h-8 px-4 text-xs font-semibold">
@@ -109,7 +109,7 @@ export default async function ReviewQueuePage() {
                       </TableCell>
                       <TableCell className="py-4 text-right">
                         {item.requirements?.tender_id ? (
-                          <Button size="sm" variant="outline" asChild className="bg-white border-slate-200 shadow-sm text-blue-600 hover:text-blue-700">
+                          <Button size="sm" variant="outline" asChild className="bg-white border-slate-200 shadow-sm text-primary hover:text-primary">
                             <Link href={`/tenders/${item.requirements.tender_id}/compliance/${item.id}`}>
                               Inspect
                             </Link>

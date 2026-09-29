@@ -77,7 +77,7 @@ export default async function BidderWorkspacePage({
             
             {/* Nav Tabs */}
             <div className="flex items-center gap-6 mt-6 border-b border-slate-200">
-              <div className="pb-3 border-b-2 border-blue-600 text-sm font-semibold text-blue-600">Overview</div>
+              <div className="pb-3 border-b-2 border-primary text-sm font-semibold text-primary">Overview</div>
               <div className="pb-3 border-b-2 border-transparent text-sm font-medium text-slate-500 hover:text-slate-700 cursor-pointer">Identity</div>
               <div className="pb-3 border-b-2 border-transparent text-sm font-medium text-slate-500 hover:text-slate-700 cursor-pointer">Documents</div>
               <div className="pb-3 border-b-2 border-transparent text-sm font-medium text-slate-500 hover:text-slate-700 cursor-pointer">Audit</div>
@@ -85,7 +85,7 @@ export default async function BidderWorkspacePage({
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm rounded-lg px-6">
+          <Button asChild className="bg-primary hover:bg-primary/90 text-white shadow-sm rounded-lg px-6">
             <Link href={`/tenders/${id}/bidders/${bidderId}/decision`}>Record Officer Decision</Link>
           </Button>
         </div>
@@ -126,7 +126,7 @@ export default async function BidderWorkspacePage({
         <Card className="border-slate-200 shadow-sm bg-white rounded-2xl overflow-hidden">
           <CardHeader className="border-b border-slate-100 bg-white pb-4">
             <CardTitle className="text-base font-bold text-slate-900 flex items-center">
-              <ShieldCheck className="h-5 w-5 mr-2 text-blue-600" /> Compliance Evaluation
+              <ShieldCheck className="h-5 w-5 mr-2 text-primary" /> Compliance Evaluation
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
@@ -179,7 +179,7 @@ export default async function BidderWorkspacePage({
                   ) : (
                     documents.map(doc => (
                       <TableRow key={doc.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50/50">
-                        <TableCell className="font-medium text-blue-600 hover:underline">
+                        <TableCell className="font-medium text-primary hover:underline">
                           <Link href="#">{doc.file_name}</Link>
                         </TableCell>
                         <TableCell className="text-slate-600 text-sm">{doc.document_type}</TableCell>

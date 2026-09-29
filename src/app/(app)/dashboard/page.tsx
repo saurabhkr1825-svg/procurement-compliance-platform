@@ -60,7 +60,7 @@ export default async function DashboardPage() {
           </h1>
           <p className="text-slate-500 mt-1 text-sm md:text-base">Overview of your procurement activities.</p>
         </div>
-        <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm h-10 px-5 rounded-lg">
+        <Button asChild className="bg-primary hover:bg-primary/90 text-white shadow-sm h-10 px-5 rounded-lg">
           <Link href="/tenders/new">
             <PlusCircle className="mr-2 h-4 w-4" />
             Create Tender
@@ -76,8 +76,8 @@ export default async function DashboardPage() {
                 <span className="text-sm font-medium text-slate-500 mb-1">Total Tenders</span>
                 <span className="text-3xl font-bold text-slate-900">{totalTenders || 0}</span>
               </div>
-              <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                <FileText className="h-6 w-6 text-blue-600" />
+              <div className="h-12 w-12 rounded-xl bg-accent flex items-center justify-center">
+                <FileText className="h-6 w-6 text-primary" />
               </div>
             </div>
           </CardContent>
@@ -131,7 +131,7 @@ export default async function DashboardPage() {
         <div className="md:col-span-7 space-y-4">
           <div className="flex justify-between items-center px-1">
             <h2 className="text-lg font-bold text-slate-900">Active Workspaces</h2>
-            <Link href="/tenders" className="text-sm font-semibold text-blue-600 hover:text-blue-800 flex items-center">
+            <Link href="/tenders" className="text-sm font-semibold text-primary hover:text-primary/90 flex items-center">
               View all <ChevronRight className="h-4 w-4 ml-1" />
             </Link>
           </div>
@@ -152,12 +152,12 @@ export default async function DashboardPage() {
                   <CardContent className="p-0">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 gap-4">
                       <div>
-                        <Link href={`/tenders/${tender.id}`} className="font-bold text-lg text-slate-900 hover:text-blue-600 hover:underline">
+                        <Link href={`/tenders/${tender.id}`} className="font-bold text-lg text-slate-900 hover:text-primary hover:underline">
                           {tender.title}
                         </Link>
                         <div className="flex items-center gap-3 mt-2 text-sm">
                           <span className="font-medium text-slate-500 font-mono text-xs">{tender.reference_number}</span>
-                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">
+                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-semibold bg-accent text-primary border border-primary/20">
                             {tender.status}
                           </span>
                         </div>
@@ -216,7 +216,7 @@ export default async function DashboardPage() {
                         <p className="text-xs text-slate-500 truncate mt-0.5">{item.bidders?.legal_name || 'Unknown Bidder'}</p>
                         <Link 
                           href={`/tenders/${item.requirements?.tender_id}/compliance/${item.id}`}
-                          className="inline-block mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800"
+                          className="inline-block mt-2 text-xs font-semibold text-primary hover:text-primary/90"
                         >
                           Resolve issue &rarr;
                         </Link>

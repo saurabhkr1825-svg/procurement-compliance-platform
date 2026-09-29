@@ -29,8 +29,8 @@ export default async function RequirementsPage({ params }: { params: Promise<{ i
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
         <div className="flex items-start gap-4">
-          <div className="bg-blue-50 p-3 rounded-xl border border-blue-100">
-            <FileSignature className="h-6 w-6 text-blue-700" />
+          <div className="bg-accent p-3 rounded-xl border border-primary/20">
+            <FileSignature className="h-6 w-6 text-primary" />
           </div>
           <div>
             <h2 className="text-xl font-bold text-slate-900">Requirement Pack {packVersion && `v${packVersion.version_number}`}</h2>
@@ -63,13 +63,13 @@ export default async function RequirementsPage({ params }: { params: Promise<{ i
               const supabase = await createClient()
               await supabase.from('requirement_pack_versions').update({ status: 'FROZEN' }).eq('id', packVersion.id)
             }}>
-              <Button type="submit" className="bg-blue-600 hover:bg-blue-700 shadow-sm">
+              <Button type="submit" className="bg-primary hover:bg-primary/90 shadow-sm">
                 <Lock className="mr-2 h-4 w-4" /> Freeze Pack
               </Button>
             </form>
           )}
           {isFrozen && (
-            <Button variant="outline" className="bg-white shadow-sm border-blue-200 text-blue-700 hover:bg-blue-50">
+            <Button variant="outline" className="bg-white shadow-sm border-primary/30 text-primary hover:bg-accent">
               <GitCommit className="mr-2 h-4 w-4" /> Create Corrigendum (v{packVersion.version_number + 1})
             </Button>
           )}

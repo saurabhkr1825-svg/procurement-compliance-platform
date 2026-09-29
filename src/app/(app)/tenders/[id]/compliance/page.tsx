@@ -148,7 +148,7 @@ export default async function ComplianceMatrixPage({ params }: { params: Promise
                       </TableCell>
                       <TableCell className="align-top py-4">
                         <div className="flex flex-col gap-1.5">
-                          <span className="inline-flex items-center text-xs font-medium text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 w-fit">SIMULATED</span>
+                          <span className="inline-flex items-center text-xs font-medium text-primary bg-accent px-2 py-0.5 rounded border border-primary/20 w-fit">SIMULATED</span>
                           <span className="text-xs text-slate-500 truncate max-w-[150px] block" title={res.bidder_documents?.file_name}>
                             {res.bidder_documents?.file_name || 'Verification Source'}
                           </span>

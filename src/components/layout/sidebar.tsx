@@ -30,7 +30,7 @@ export function Sidebar() {
     <div className="hidden md:flex h-full w-[240px] flex-col border-r border-border bg-background">
       <div className="flex h-16 items-center px-6 pt-4 mb-4">
         <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm">
+          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shadow-sm">
             <ShieldCheck className="h-5 w-5 text-white" />
           </div>
           <span className="text-xl font-bold tracking-tight text-slate-900">ProcureAI</span>

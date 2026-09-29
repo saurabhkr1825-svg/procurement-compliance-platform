@@ -32,7 +32,7 @@ export default async function TenderLayout({
             <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 mt-3">
               <span className="flex items-center gap-1.5"><FileText className="h-4 w-4" /> Ref: {tender.reference_number}</span>
               <span className="flex items-center gap-1.5"><Activity className="h-4 w-4" /> Status: 
-                <span className="font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">{tender.status}</span>
+                <span className="font-semibold text-primary bg-accent px-2 py-0.5 rounded-md border border-primary/20">{tender.status}</span>
               </span>
               <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {new Date(tender.created_at).toLocaleDateString()}</span>
             </div>
