@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowLeft, ShieldCheck, FileCheck, CheckCircle2, XCircle, AlertCircle, HelpCircle, Lock } from "lucide-react"
+import { submitDecisionAction } from "./actions"
 
 export default async function OfficerDecisionPage({
   params,
@@ -33,33 +34,7 @@ export default async function OfficerDecisionPage({
 
   const hasIssues = failCount > 0 || reviewCount > 0 || notVerifiedCount > 0
 
-  async function submitDecision(formData: FormData) {
-    "use server"
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return
-
-    const status = formData.get("status") as string
-    const summary = formData.get("summary") as string
-
-    await supabase.from("decisions").upsert({
-      bidder_id: bidderId,
-      tender_id: id,
-      status: status,
-      summary: summary,
-      officer_id: user.id
-    }, { onConflict: 'bidder_id' })
-
-    await supabase.from("audit_logs").insert({
-      user_id: user.id,
-      tender_id: id,
-      bidder_id: bidderId,
-      action: 'OFFICER_DECISION_RECORDED',
-      metadata: { status, summary }
-    })
-
-    redirect(`/tenders/${id}/bidders/${bidderId}`)
-  }
+  const submitDecision = submitDecisionAction.bind(null, id, bidderId)
 
   const existingDecision = bidder.decisions && bidder.decisions.length > 0 ? bidder.decisions[0] : null
 
@@ -171,7 +146,7 @@ export default async function OfficerDecisionPage({
                     <option value="">Select a status...</option>
                     <option value="QUALIFIED">QUALIFIED - Compliant</option>
                     <option value="DISQUALIFIED">DISQUALIFIED - Non-Compliant</option>
-                    <option value="CLARIFICATION_REQUIRED">REQUIRES CLARIFICATION</option>
+                    <option value="REQUIRES_CLARIFICATION">REQUIRES CLARIFICATION</option>
                   </select>
                 </div>
                 

@@ -21,7 +21,7 @@ export async function uploadTenderDocument(tenderId: string, formData: FormData)
     file_size: file.size,
     mime_type: file.type,
     storage_path: path,
-    processing_status: 'UPLOADED'
+    processing_status: 'PENDING'
   }).select().single();
   
   if (error) return { error: error.message };
