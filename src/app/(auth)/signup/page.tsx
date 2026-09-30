@@ -47,9 +47,9 @@ export default function SignupPage() {
           <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm border border-border mb-4">
             <ShieldCheck className="h-6 w-6 text-primary" />
           </div>
-          <h1 className="text-xl font-bold tracking-tight text-foreground">ProcureAI</h1>
+          <h1 className="text-xl font-bold tracking-tight text-foreground">GeM SecureX</h1>
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mt-2">
-            Bid Compliance Platform
+            Bid Compliance & Verification Platform
           </p>
         </div>
 
@@ -84,16 +84,7 @@ export default function SignupPage() {
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-sm font-semibold text-foreground">Organization (Optional)</label>
-              <Input 
-                id="organization" 
-                name="organization" 
-                type="text" 
-                placeholder="Ministry of Finance"
-                className="bg-white border-border"
-              />
-            </div>
+
 
             <div className="space-y-1.5">
               <label className="text-sm font-semibold text-foreground">Email</label>
@@ -101,7 +92,7 @@ export default function SignupPage() {
                 id="email" 
                 name="email" 
                 type="email" 
-                placeholder="officer@procure.ai"
+                placeholder="officer@gem.gov.in"
                 required 
                 className="bg-white border-border"
               />
@@ -157,7 +148,7 @@ export default function SignupPage() {
           <div className="mt-8 text-center">
             <p className="text-sm text-muted-foreground">
               Already have an account?{' '}
-              <Link href="/login" className="font-semibold text-primary hover:text-primary/80">
+              <Link href="/login" className="font-semibold text-primary hover:text-[#2563EB]">
                 Sign in
               </Link>
             </p>

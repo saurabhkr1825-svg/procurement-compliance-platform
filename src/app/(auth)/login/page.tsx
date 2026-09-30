@@ -31,9 +31,9 @@ export default function LoginPage() {
           <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm border border-border mb-4">
             <ShieldCheck className="h-6 w-6 text-primary" />
           </div>
-          <h1 className="text-xl font-bold tracking-tight text-foreground">ProcureAI</h1>
+          <h1 className="text-xl font-bold tracking-tight text-foreground">GeM SecureX</h1>
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mt-2">
-            Bid Compliance Platform
+            Bid Compliance & Verification Platform
           </p>
         </div>
 
@@ -57,27 +57,18 @@ export default function LoginPage() {
                 id="email" 
                 name="email" 
                 type="email" 
-                placeholder="officer@procure.ai"
+                placeholder="officer@gem.gov.in"
                 required 
                 className="bg-white border-border"
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-sm font-semibold text-foreground">Name (Optional)</label>
-              <Input 
-                id="full_name" 
-                name="full_name" 
-                type="text" 
-                placeholder="Ravi Kumar"
-                className="bg-white border-border"
-              />
-            </div>
+
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-sm font-semibold text-foreground">Password</label>
-                <Link href="#" className="text-xs font-medium text-primary hover:text-primary/80">
+                <Link href="#" className="text-xs font-medium text-primary hover:text-[#2563EB]">
                   Forgot password?
                 </Link>
               </div>
@@ -108,7 +99,7 @@ export default function LoginPage() {
           <div className="mt-8 text-center">
             <p className="text-sm text-muted-foreground">
               Don&apos;t have an account?{' '}
-              <Link href="/signup" className="font-semibold text-primary hover:text-primary/80">
+              <Link href="/signup" className="font-semibold text-primary hover:text-[#2563EB]">
                 Sign up
               </Link>
             </p>

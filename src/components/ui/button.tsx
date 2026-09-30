@@ -17,7 +17,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50",
           {
-            'bg-primary text-primary-foreground hover:bg-primary/90': variant === 'default',
+            'bg-primary text-primary-foreground hover:bg-[#2563EB]': variant === 'default',
             'border border-border bg-background hover:bg-muted': variant === 'outline',
             'hover:bg-muted hover:text-foreground': variant === 'ghost',
             'bg-red-500 text-white hover:bg-red-600': variant === 'destructive',

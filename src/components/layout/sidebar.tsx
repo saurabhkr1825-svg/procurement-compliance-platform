@@ -33,7 +33,7 @@ export function Sidebar() {
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shadow-sm">
             <ShieldCheck className="h-5 w-5 text-white" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-slate-900">ProcureAI</span>
+          <span className="text-xl font-bold tracking-tight text-slate-900">GeM SecureX</span>
         </div>
       </div>
       <nav className="flex-1 space-y-1.5 px-4 overflow-y-auto">
@@ -46,14 +46,14 @@ export function Sidebar() {
               className={cn(
                 "group flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive 
-                  ? "bg-secondary text-primary" 
+                  ? "bg-accent text-accent-foreground" 
                   : "text-muted-foreground hover:bg-secondary hover:text-primary"
               )}
             >
               <item.icon
                 className={cn(
                   "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
-                  isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary"
+                  isActive ? "text-accent-foreground" : "text-muted-foreground group-hover:text-primary"
                 )}
                 aria-hidden="true"
               />

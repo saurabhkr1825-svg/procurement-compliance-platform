@@ -8,8 +8,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: 'ProcureAI - Bid Compliance Platform',
-  description: 'AI Procurement Bid Compliance Platform',
+  title: 'GeM SecureX - Bid Compliance Platform',
+  description: 'AI-Powered Bid Compliance & Verification Platform',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
