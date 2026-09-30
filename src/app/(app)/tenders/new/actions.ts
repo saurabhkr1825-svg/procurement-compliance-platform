@@ -10,7 +10,7 @@ export async function uploadTenderDocument(tenderId: string, formData: FormData)
   const supabase = await createClient();
   
   // Using the path expected by RLS policies
-  const path = `${tenderId}/${Date.now()}_${file.name}`;
+  const path = `tenders/${tenderId}/${Date.now()}_${file.name}`;
   
   const { error: uploadError } = await supabase.storage.from('tender-documents').upload(path, file);
   if (uploadError) return { error: uploadError.message };

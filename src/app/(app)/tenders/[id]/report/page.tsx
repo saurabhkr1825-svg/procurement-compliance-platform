@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server"
+import { ReportActions } from "./report-actions"
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -31,7 +32,8 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
           <h2 className="text-xl font-semibold">Evaluation Report Preview</h2>
           <p className="text-sm text-muted-foreground">Comprehensive compliance and verification report.</p>
         </div>
-        <div className="flex gap-2">
+        <ReportActions />
+        <div className="hidden">
           <Button variant="outline" className="print:hidden">
             <Printer className="h-4 w-4 mr-2" />
             Print Report

@@ -30,14 +30,12 @@ export async function createBidder(tenderId: string, formData: FormData) {
     
   const orClauses = []
   if (registration_number) orClauses.push(`registration_number.eq."${registration_number}"`)
-  if (pan) orClauses.push(`pan.eq."${pan}"`)
-  if (gstin) orClauses.push(`gstin.eq."${gstin}"`)
   
   if (orClauses.length > 0) {
     conflictQuery = conflictQuery.or(orClauses.join(","))
     const { data: existing } = await conflictQuery
     if (existing && existing.length > 0) {
-      return { error: "A bidder with this PAN, GSTIN, or Registration Number already exists in this tender." }
+      return { error: "A bidder with this Registration Number already exists in this tender." }
     }
   }
 
@@ -46,9 +44,7 @@ export async function createBidder(tenderId: string, formData: FormData) {
     tender_id: tenderId,
     legal_name,
     registration_number: registration_number || null,
-    pan: pan || null,
-    gstin: gstin || null,
-    registered_address: registered_address || null,
+    address: registered_address || null,
     contact_email: contact_email || null,
     contact_phone: contact_phone || null,
   }).select().single()

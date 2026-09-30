@@ -19,22 +19,12 @@ export function AddBidderModal({ tenderId }: { tenderId: string }) {
     let pan = formData.get("pan")?.toString().trim()
     if (pan) {
       pan = pan.toUpperCase()
-      if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan)) {
-        setError("Invalid PAN format.")
-        setLoading(false)
-        return
-      }
       formData.set("pan", pan)
     }
 
     let gstin = formData.get("gstin")?.toString().trim()
     if (gstin) {
       gstin = gstin.toUpperCase()
-      if (gstin.length !== 15) {
-        setError("Invalid GSTIN format (must be 15 characters).")
-        setLoading(false)
-        return
-      }
       formData.set("gstin", gstin)
     }
     
