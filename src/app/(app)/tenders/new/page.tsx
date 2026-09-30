@@ -184,10 +184,6 @@ function WizardContent() {
   }
   
   function proceedToStep3() {
-    if (documents.length === 0) {
-      setError("At least one document is required to proceed.")
-      return
-    }
     router.push(`/tenders/new?id=${tenderId}&step=3`)
   }
 

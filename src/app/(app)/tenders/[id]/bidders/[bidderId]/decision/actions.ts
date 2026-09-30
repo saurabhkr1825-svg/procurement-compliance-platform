@@ -8,14 +8,14 @@ export async function submitDecisionAction(tenderId: string, bidderId: string, f
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) {
     console.error("No user found for decision submission")
-    return { error: "Unauthorized" }
+    return
   }
 
   const status = formData.get("status") as string
   const summary = formData.get("summary") as string
 
   if (!status || !summary) {
-    return { error: "Missing required fields" }
+    return
   }
 
   const { error: upsertError } = await supabase.from("decisions").upsert({
@@ -28,7 +28,7 @@ export async function submitDecisionAction(tenderId: string, bidderId: string, f
 
   if (upsertError) {
     console.error("Decision upsert error:", upsertError)
-    return { error: upsertError.message }
+    return
   }
 
   const { error: auditError } = await supabase.from("audit_logs").insert({
